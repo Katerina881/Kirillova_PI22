@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservView", "ZavodConservView\ZavodConservView.csproj", "{AEC6C074-EABB-4688-A4A7-9E039C3B0A79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservbusinessLogic", "ZavodConservbusinessLogic\ZavodConservbusinessLogic.csproj", "{7EE3790D-9717-40AB-9BB9-1612B9FE36BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZavodConservbusinessLogic", "ZavodConservbusinessLogic\ZavodConservbusinessLogic.csproj", "{7EE3790D-9717-40AB-9BB9-1612B9FE36BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservListImplement", "ZavodConservListImplement\ZavodConservListImplement.csproj", "{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZavodConservListImplement", "ZavodConservListImplement\ZavodConservListImplement.csproj", "{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservFileImplement", "ZavodConservFileImplement\ZavodConservFileImplement.csproj", "{8640E275-8B24-4D02-A6FC-8966A0B78B36}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
