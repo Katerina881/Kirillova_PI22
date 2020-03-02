@@ -22,6 +22,11 @@ namespace ZavodConservView
         public FormConserv(IConservLogic service)
         {
             InitializeComponent();
+            dataGridView.Columns.Add("Id", "Id");
+            dataGridView.Columns.Add("ComponentName", "Компонент");
+            dataGridView.Columns.Add("Count", "Количество");
+            dataGridView.Columns[0].Visible = false;
+            dataGridView.Columns[1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             this.logic = service;
         }
         private void FormConserv_Load(object sender, EventArgs e)

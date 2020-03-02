@@ -36,9 +36,13 @@ namespace ZavodConservView
             try 
             {
                 var list = logicP.Read(null);
-                comboBoxConserv.DataSource = list;
-                comboBoxConserv.DisplayMember = "EquipmentName";
-                comboBoxConserv.ValueMember = "Id";
+                if (list != null)
+                {
+                    comboBoxConserv.DataSource = list;
+                    comboBoxConserv.DisplayMember = "ConservName";
+                    comboBoxConserv.ValueMember = "Id";
+                    comboBoxConserv.SelectedItem = null;
+                }
             } 
             catch (Exception ex) 
             { 
