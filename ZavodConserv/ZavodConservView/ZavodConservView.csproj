@@ -148,6 +148,10 @@
       <Project>{7ee3790d-9717-40ab-9bb9-1612b9fe36bf}</Project>
       <Name>ZavodConservbusinessLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ZavodConservFileImplement\ZavodConservFileImplement.csproj">
+      <Project>{8640e275-8b24-4d02-a6fc-8966a0b78b36}</Project>
+      <Name>ZavodConservFileImplement</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ZavodConservListImplement\ZavodConservListImplement.csproj">
       <Project>{abbd8ffe-f4a8-4b52-9271-c7047369a93c}</Project>
       <Name>ZavodConservListImplement</Name>
