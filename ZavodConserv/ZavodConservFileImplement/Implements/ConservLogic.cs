@@ -45,7 +45,7 @@ namespace ZavodConservFileImplement.Implements
             source.ConservComponents.RemoveAll(rec => rec.ConservId == model.Id &&
            !model.ConservComponents.ContainsKey(rec.ComponentId));
             // обновили количество у существующих записей
-            var updateComponents = source.ConservComponents.Where(rec => rec.ConservId ==
+            var updateComponents = source.ConservComponents.Where(rec => rec.ComponentId ==
            model.Id && model.ConservComponents.ContainsKey(rec.ComponentId));
             foreach (var updateComponent in updateComponents)
             {

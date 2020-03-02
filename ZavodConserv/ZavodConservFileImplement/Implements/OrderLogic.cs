@@ -11,13 +11,15 @@ namespace ZavodConservFileImplement.Implements
     public class OrderLogic : IOrderLogic
     {
         private readonly FileDataListSingleton source;
+
         public OrderLogic()
         {
             source = FileDataListSingleton.GetInstance();
         }
+
         public void CreateOrUpdate(OrderBindingModel model)
         {
-            Order element = source.Orders.FirstOrDefault(rec => rec.Id != model.Id && rec.ConservId == model.ConservId && rec.Status == model.Status);
+            Order element; 
             if (model.Id.HasValue)
             {
                 element = source.Orders.FirstOrDefault(rec => rec.Id == model.Id);
@@ -33,13 +35,15 @@ namespace ZavodConservFileImplement.Implements
                 element = new Order { Id = maxId + 1 };
                 source.Orders.Add(element);
             }
+
             element.Status = model.Status;
-            element.ConservId = model.ConservId;
+            element.ConservId = model.ConservId == 0 ? element.ConservId : model.ConservId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.DateCreate = model.DateCreate;
             element.DateImplement = model.DateImplement;
         }
+
         public void Delete(OrderBindingModel model)
         {
             Order element = source.Orders.FirstOrDefault(rec => rec.Id ==
@@ -53,6 +57,7 @@ namespace ZavodConservFileImplement.Implements
                 throw new Exception("Элемент не найден");
             }
         }
+
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
@@ -61,6 +66,7 @@ namespace ZavodConservFileImplement.Implements
             {
                 Id = rec.Id,
                 Count = rec.Count,
+                ConservName = GetConservName(rec.ConservId),
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 ConservId = rec.ConservId,
@@ -68,6 +74,14 @@ namespace ZavodConservFileImplement.Implements
                 Sum = rec.Sum
             })
             .ToList();
+        }
+
+        private string GetConservName(int id)
+        {
+            string name = "";
+            var conserv = source.Conservs.FirstOrDefault(x => x.Id == id);
+            name = conserv != null ? conserv.ConservName : "";
+            return name;
         }
     }
 }

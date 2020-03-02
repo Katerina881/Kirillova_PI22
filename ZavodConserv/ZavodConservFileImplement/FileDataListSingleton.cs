@@ -167,12 +167,12 @@ namespace ZavodConservFileImplement
             if (Conservs != null)
             {
                 var xElement = new XElement("Conservs");
-                foreach (var Conserv in Conservs)
+                foreach (var conserv in Conservs)
                 {
                     xElement.Add(new XElement("Conserv",
-                    new XAttribute("Id", Conserv.Id),
-                    new XElement("ConservName", Conserv.ConservName),
-                    new XElement("Price", Conserv.Price)));
+                    new XAttribute("Id", conserv.Id),
+                    new XElement("ConservName", conserv.ConservName),
+                    new XElement("Price", conserv.Price)));
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ConservFileName);
@@ -183,13 +183,13 @@ namespace ZavodConservFileImplement
             if (ConservComponents != null)
             {
                 var xElement = new XElement("ConservComponents");
-                foreach (var ConservComponent in ConservComponents)
+                foreach (var conservComponent in ConservComponents)
                 {
                     xElement.Add(new XElement("ConservComponent",
-                    new XAttribute("Id", ConservComponent.Id),
-                    new XElement("ConservId", ConservComponent.ConservId),
-                    new XElement("ComponentId", ConservComponent.ComponentId),
-                    new XElement("Count", ConservComponent.Count)));
+                    new XAttribute("Id", conservComponent.Id),
+                    new XElement("ConservId", conservComponent.ConservId),
+                    new XElement("ComponentId", conservComponent.ComponentId),
+                    new XElement("Count", conservComponent.Count)));
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ConservComponentFileName);
