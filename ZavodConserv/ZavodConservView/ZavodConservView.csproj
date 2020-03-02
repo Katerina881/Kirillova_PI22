@@ -35,6 +35,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,16 +47,79 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Unity.Abstractions, Version=5.11.4.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.4\lib\net47\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.11.5.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.11.4\lib\net47\Unity.Container.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="FormComponent.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="FormComponent.Designer.cs">
+      <DependentUpon>FormComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormComponents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormComponents.Designer.cs">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConserv.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConserv.Designer.cs">
+      <DependentUpon>FormConserv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConservComponent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConservComponent.Designer.cs">
+      <DependentUpon>FormConservComponent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormConservs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormConservs.Designer.cs">
+      <DependentUpon>FormConservs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCreateOrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCreateOrder.Designer.cs">
+      <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormComponent.resx">
+      <DependentUpon>FormComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormComponents.resx">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConserv.resx">
+      <DependentUpon>FormConserv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConservComponent.resx">
+      <DependentUpon>FormConservComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormConservs.resx">
+      <DependentUpon>FormConservs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCreateOrder.resx">
+      <DependentUpon>FormCreateOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -63,6 +129,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +142,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZavodConservbusinessLogic\ZavodConservbusinessLogic.csproj">
+      <Project>{7ee3790d-9717-40ab-9bb9-1612b9fe36bf}</Project>
+      <Name>ZavodConservbusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZavodConservListImplement\ZavodConservListImplement.csproj">
+      <Project>{abbd8ffe-f4a8-4b52-9271-c7047369a93c}</Project>
+      <Name>ZavodConservListImplement</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
