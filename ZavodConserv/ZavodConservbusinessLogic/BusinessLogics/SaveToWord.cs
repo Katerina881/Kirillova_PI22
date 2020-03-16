@@ -83,8 +83,7 @@ WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document
             return null;
         }
 
-        private static ParagraphProperties
-        CreateParagraphProperties(WordParagraphProperties paragraphProperties)
+        private static ParagraphProperties CreateParagraphProperties(WordParagraphProperties paragraphProperties)
         {
             if (paragraphProperties != null)
             {

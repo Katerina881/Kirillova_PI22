@@ -17,7 +17,8 @@ namespace ZavodConservbusinessLogic.BusinessLogics
         public ReportLogic(IConservLogic ConservLogic, IComponentLogic componentLogic,
 IOrderLogic orderLLogic)
         {
-            this.ConservLogic = ConservLogic; this.componentLogic = componentLogic; this.orderLogic = orderLLogic;
+            this.ConservLogic = ConservLogic; 
+            this.componentLogic = componentLogic; this.orderLogic = orderLLogic;
         }
 
         public List<ReportConservComponentViewModel> GetConservComponent()
