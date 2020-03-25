@@ -14,12 +14,15 @@ namespace ZavodConservView
 
         private readonly MainLogic logic;
 
+        private readonly ReportLogic report;
+
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        public FormMain(MainLogic logic, ReportLogic report, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.report = report;
             this.orderLogic = orderLogic;
         }
 
@@ -127,8 +130,7 @@ namespace ZavodConservView
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     report.SaveComponentsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
-                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK,
-MessageBoxIcon.Information);
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }

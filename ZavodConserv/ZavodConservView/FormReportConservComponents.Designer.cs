@@ -85,6 +85,7 @@
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportConservComponents";
             this.Text = "Компоненты по консервам";
+            this.Load += new System.EventHandler(this.FormReportConservComponents_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

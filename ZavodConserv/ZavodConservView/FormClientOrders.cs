@@ -20,18 +20,13 @@ namespace ZavodConservView
             this.logic = logic;
         }
 
-        private void FormClientOrders_Load(object sender, EventArgs e)
-        {
-
-            this.reportViewer.RefreshReport();
-        }
-
         private void ButtonMake_Click(object sender, EventArgs e)
         {
             if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
             {
                 MessageBox.Show("Дата начала должна быть меньше даты окончания",
-"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             try
             {
@@ -46,7 +41,6 @@ namespace ZavodConservView
                 });
                 ReportDataSource source = new ReportDataSource("DataSetOrders", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
-
                 reportViewer.RefreshReport();
             }
             catch (Exception ex)
