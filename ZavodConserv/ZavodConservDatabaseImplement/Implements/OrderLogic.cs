@@ -24,24 +24,18 @@ namespace ZavodConservDatabaseImplement.Implements
                     {
                         throw new Exception("Элемент не найден");
                     }
-                    element.Status = model.Status;
-                    element.ConservId = model.ConservId;
-                    element.Count = model.Count;
-                    element.Sum = model.Sum;
-                    element.DateCreate = model.DateCreate;
-                    element.DateImplement = model.DateImplement;
                 }
                 else
                 {
                     element = new Order();
-                    element.Status = model.Status;
-                    element.ConservId = model.ConservId;
-                    element.Count = model.Count;
-                    element.Sum = model.Sum;
-                    element.DateCreate = model.DateCreate;
-                    element.DateImplement = model.DateImplement;
                     context.Orders.Add(element);
                 }
+                element.Status = model.Status;
+                element.ConservId = model.ConservId == 0 ? element.ConservId : model.ConservId;
+                element.Count = model.Count;
+                element.Sum = model.Sum;
+                element.DateCreate = model.DateCreate;
+                element.DateImplement = model.DateImplement;
                 context.SaveChanges();
             }
         }
@@ -73,7 +67,7 @@ namespace ZavodConservDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     Count = rec.Count,
-                    ConservName = context.Conservs.FirstOrDefault((r) => r.Id == rec.ConservId).ConservName,
+                    ConservName = rec.Conserv.ConservName,
                     DateCreate = rec.DateCreate,
                     DateImplement = rec.DateImplement,
                     ConservId = rec.ConservId,
