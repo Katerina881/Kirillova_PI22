@@ -18,7 +18,8 @@ namespace ZavodConservbusinessLogic.BusinessLogics
 IOrderLogic orderLLogic)
         {
             this.ConservLogic = ConservLogic; 
-            this.componentLogic = componentLogic; this.orderLogic = orderLLogic;
+            this.componentLogic = componentLogic;
+            this.orderLogic = orderLLogic;
         }
 
         public List<ReportConservComponentViewModel> GetConservComponent()
@@ -41,7 +42,8 @@ IOrderLogic orderLLogic)
                 {
                     if (Conserv.ConservComponents.ContainsKey(component.Id))
                     {
-                        record.Conservs.Add(new Tuple<string, int>(Conserv.ConservName, Conserv.ConservComponents[component.Id].Item2)); record.TotalCount += Conserv.ConservComponents[component.Id].Item2;
+                        record.Conservs.Add(new Tuple<string, int>(Conserv.ConservName, Conserv.ConservComponents[component.Id].Item2));
+                        record.TotalCount += Conserv.ConservComponents[component.Id].Item2;
                     }
                 }
 
@@ -80,7 +82,7 @@ IOrderLogic orderLLogic)
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "Список консерв с компонентами",
                 ConservComponents = GetConservComponent()
             });
         }

@@ -137,12 +137,14 @@ namespace ZavodConservView
 
         private void ComponentConservToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormReportConservComponents>(); form.ShowDialog();
+            var form = Container.Resolve<FormReportConservComponents>();
+            form.ShowDialog();
         }
 
         private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormClientOrders>(); form.ShowDialog();
+            var form = Container.Resolve<FormClientOrders>(); 
+            form.ShowDialog();
         }
     }
 }

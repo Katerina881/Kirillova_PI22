@@ -19,7 +19,7 @@ namespace ZavodConservView
             InitializeComponent();
             this.logic = logic;
         }
-
+        
         private void ButtonMake_Click(object sender, EventArgs e)
         {
             if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)

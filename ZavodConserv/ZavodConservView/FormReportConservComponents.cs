@@ -22,7 +22,8 @@ namespace ZavodConservView
         {
             try
             {
-                var dict = logic.GetConservComponent(); if (dict != null)
+                var dict = logic.GetConservComponent();
+                if (dict != null)
                 {
                     dataGridView.Rows.Clear(); foreach (var elem in dict)
                     {
