@@ -11,5 +11,7 @@ namespace ZavodConservbusinessLogic.HelperModels
 
         public List<ReportConservComponentViewModel> ConservComponents { get; set; }
 
+        public List<ReportOrdersViewModel> Orders { get; set; }
+
     }
 }

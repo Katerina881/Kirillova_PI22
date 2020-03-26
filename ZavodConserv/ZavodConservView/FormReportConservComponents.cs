@@ -3,6 +3,8 @@ using ZavodConservbusinessLogic.BusinessLogics;
 using System;
 using System.Windows.Forms;
 using Unity;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ZavodConservView
 {
@@ -18,23 +20,43 @@ namespace ZavodConservView
             this.logic = logic;
         }
 
-        private void FormReportConservComponents_Load(object sender, EventArgs e)
+        private void ButtonMake_Click(object sender, EventArgs e)
         {
+            if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             try
             {
-                var dict = logic.GetConservComponent();
+                var dict = logic.GetOrders(new ReportBindingModel { DateFrom = dateTimePickerFrom.Value.Date, DateTo = dateTimePickerTo.Value.Date });
+                List<DateTime> dates = new List<DateTime>();
+                foreach (var order in dict)
+                {
+                    if (!dates.Contains(order.DateCreate.Date))
+                    {
+                        dates.Add(order.DateCreate.Date);
+                    }
+                }
+
                 if (dict != null)
                 {
-                    dataGridView.Rows.Clear(); foreach (var elem in dict)
+                    dataGridView.Rows.Clear();
+
+                    foreach (var date in dates)
                     {
-                        dataGridView.Rows.Add(new object[] { elem.ComponentName, "", ""
-});
-                        foreach (var listElem in elem.Conservs)
+                        decimal dateSum = 0;
+
+                        dataGridView.Rows.Add(new object[] { date.Date, "", "" });
+
+                        foreach (var order in dict.Where(rec => rec.DateCreate.Date == date.Date))
                         {
-                            dataGridView.Rows.Add(new object[] { "", listElem.Item1, listElem.Item2 });
+                            dataGridView.Rows.Add(new object[] { "", order.ConservName, order.Sum });
+                            dateSum += order.Sum;
                         }
-                        dataGridView.Rows.Add(new object[] { "Итого", "", elem.TotalCount
-});
+
+                        dataGridView.Rows.Add(new object[] { "Итого", "", dateSum });
                         dataGridView.Rows.Add(new object[] { });
                     }
                 }
@@ -47,16 +69,20 @@ namespace ZavodConservView
 
         private void ButtonSaveToExcel_Click(object sender, EventArgs e)
         {
+            if (dateTimePickerFrom.Value.Date >= dateTimePickerTo.Value.Date)
+            {
+                MessageBox.Show("Дата начала должна быть меньше даты окончания", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (var dialog = new SaveFileDialog { Filter = "xlsx|*.xlsx" })
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     try
                     {
-                        logic.SaveConservComponentToExcelFile(new ReportBindingModel
-                        {
-                            FileName = dialog.FileName
-                        });
+                        logic.SaveConservComponentToExcelFile(new ReportBindingModel { FileName = dialog.FileName, DateFrom = dateTimePickerFrom.Value.Date, DateTo = dateTimePickerTo.Value.Date });
+
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)
@@ -65,6 +91,6 @@ namespace ZavodConservView
                     }
                 }
             }
-        }
+        }  
     }
 }

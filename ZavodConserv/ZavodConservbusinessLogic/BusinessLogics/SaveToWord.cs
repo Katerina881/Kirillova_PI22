@@ -25,22 +25,6 @@ WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document
                         JustificationValues = JustificationValues.Center
                     }
                 }));
-
-                foreach (var component in info.Components)
-                {
-                    docBody.AppendChild(CreateParagraph(new WordParagraph
-                    {
-                        Texts = new List<string> 
-                        { 
-                            component.ComponentName
-                        },
-                        TextProperties = new WordParagraphProperties
-                        {
-                            Size = "24",
-                            JustificationValues = JustificationValues.Both
-                        }
-                    }));
-                }
                 foreach (var conservs in info.Conserv)
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph

@@ -5,6 +5,7 @@ using ZavodConservbusinessLogic.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ZavodConservShopBusinessLogic.BusinessLogics;
 
 namespace ZavodConservbusinessLogic.BusinessLogics
 {
@@ -25,46 +26,42 @@ IOrderLogic orderLLogic)
         public List<ReportConservComponentViewModel> GetConservComponent()
         {
             var components = componentLogic.Read(null);
-
-            var Conservs = ConservLogic.Read(null);
-
+            var products = ConservLogic.Read(null);
             var list = new List<ReportConservComponentViewModel>();
 
-            foreach (var component in components)
+            foreach (var product in products)
             {
-                var record = new ReportConservComponentViewModel
+                foreach (var component in components)
                 {
-                    ComponentName = component.ComponentName,
-                    Conservs = new List<Tuple<string, int>>(),
-                    TotalCount = 0
-                };
-                foreach (var Conserv in Conservs)
-                {
-                    if (Conserv.ConservComponents.ContainsKey(component.Id))
+                    if (product.ConservComponents.ContainsKey(component.Id))
                     {
-                        record.Conservs.Add(new Tuple<string, int>(Conserv.ConservName, Conserv.ConservComponents[component.Id].Item2));
-                        record.TotalCount += Conserv.ConservComponents[component.Id].Item2;
+                        var record = new ReportConservComponentViewModel
+                        {
+                            ConservName = product.ConservName,
+                            ComponentName = component.ComponentName,
+                            TotalCount = product.ConservComponents[component.Id].Item2
+                        };
+                        list.Add(record);
                     }
                 }
-
-                list.Add(record);
             }
-
             return list;
         }
 
         public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
         {
-            return orderLogic.Read(new OrderBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo })
-                    .Select(x => new ReportOrdersViewModel
-                    {
-                        DateCreate = x.DateCreate,
-                        ConservName = x.ConservName,
-                        Count = x.Count,
-                        Sum = x.Sum,
-                        Status = x.Status
-                    })
-                    .ToList();
+            return orderLogic.Read(new OrderBindingModel
+            {
+                DateFrom = model.DateFrom,
+                DateTo = model.DateTo
+            }).Select(x => new ReportOrdersViewModel
+            {
+                DateCreate = x.DateCreate,
+                ConservName = x.ConservName,
+                Count = x.Count,
+                Sum = x.Sum,
+                Status = x.Status
+            }).ToList();
         }
 
         public void SaveComponentsToWordFile(ReportBindingModel model)
@@ -83,20 +80,18 @@ IOrderLogic orderLLogic)
             SaveToExcel.CreateDoc(new ExcelInfo
             {
                 FileName = model.FileName,
-                Title = "Список консерв с компонентами",
-                ConservComponents = GetConservComponent()
+                Title = "Список заказов",
+                Orders = GetOrders(model)
             });
         }
 
-        public void SaveOrdersToPdfFile(ReportBindingModel model)
+        public void SaveConservComponentToPdfFile(ReportBindingModel model)
         {
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
                 Title = "Список заказов",
-                DateFrom = model.DateFrom.Value,
-                DateTo = model.DateTo.Value,
-                Orders = GetOrders(model)
+                ConservComponents = GetConservComponent()
             });
         }
     }
