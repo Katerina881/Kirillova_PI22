@@ -59,7 +59,7 @@
             this.ButtonMake.TabIndex = 2;
             this.ButtonMake.Text = "Сформировать";
             this.ButtonMake.UseVisualStyleBackColor = true;
-            //this.ButtonMake.Click += new System.EventHandler(this.ButtonMake_Click);
+            this.ButtonMake.Click += new System.EventHandler(this.ButtonMake_Click);
             // 
             // ButtonToPdf
             // 
