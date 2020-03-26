@@ -141,7 +141,12 @@ SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
             fills.Append(fill1); fills.Append(fill2);
 
             Borders borders = new Borders() { Count = (UInt32Value)2U };
-            Border borderNoBorder = new Border(); borderNoBorder.Append(new LeftBorder()); borderNoBorder.Append(new RightBorder()); borderNoBorder.Append(new TopBorder()); borderNoBorder.Append(new BottomBorder()); borderNoBorder.Append(new DiagonalBorder());
+            Border borderNoBorder = new Border();
+            borderNoBorder.Append(new LeftBorder());
+            borderNoBorder.Append(new RightBorder());
+            borderNoBorder.Append(new TopBorder());
+            borderNoBorder.Append(new BottomBorder()); 
+            borderNoBorder.Append(new DiagonalBorder());
 
             Border borderThin = new Border();
 

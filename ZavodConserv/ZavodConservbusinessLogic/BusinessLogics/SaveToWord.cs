@@ -30,7 +30,10 @@ WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<string> { component.ComponentName },
+                        Texts = new List<string> 
+                        { 
+                            component.ComponentName
+                        },
                         TextProperties = new WordParagraphProperties
                         {
                             Size = "24",
@@ -38,8 +41,24 @@ WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document
                         }
                     }));
                 }
+                foreach (var conservs in info.Conserv)
+                {
+                    docBody.AppendChild(CreateParagraph(new WordParagraph
+                    {
+                        Texts = new List<string> 
+                        { 
+                            conservs.ConservName,
+                            " - " + conservs.Price.ToString()
+                        },
+                        TextProperties = new WordParagraphProperties
+                        {
+                            Bold = true,
+                            Size = "24",
+                            JustificationValues = JustificationValues.Both
+                        }
+                    }));
+                }
                 docBody.AppendChild(CreateSectionProperties());
-
                 wordDocument.MainDocumentPart.Document.Save();
             }
         }
@@ -67,19 +86,24 @@ WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document
                 foreach (var run in paragraph.Texts)
                 {
                     Run docRun = new Run();
-                    RunProperties properties = new RunProperties(); properties.AppendChild(new FontSize { Val = paragraph.TextProperties.Size });
-                    if (paragraph.TextProperties.Bold)
+                    RunProperties properties = new RunProperties(); properties.AppendChild(new FontSize 
+                    { 
+                        Val = paragraph.TextProperties.Size
+                    });
+                    if (!run.StartsWith(" - ") && paragraph.TextProperties.Bold)
                     {
                         properties.AppendChild(new Bold());
                     }
                     docRun.AppendChild(properties);
 
-                    docRun.AppendChild(new Text { Text = run, Space = SpaceProcessingModeValues.Preserve });
+                    docRun.AppendChild(new Text
+                    {
+                        Text = run, Space = SpaceProcessingModeValues.Preserve
+                    });
                     docParagraph.AppendChild(docRun);
                 }
                 return docParagraph;
             }
-
             return null;
         }
 

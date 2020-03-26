@@ -72,7 +72,8 @@ IOrderLogic orderLLogic)
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент",
+                Title = "Список компонент и консерв",
+                Conserv = ConservLogic.Read(null),
                 Components = componentLogic.Read(null)
             });
         }
