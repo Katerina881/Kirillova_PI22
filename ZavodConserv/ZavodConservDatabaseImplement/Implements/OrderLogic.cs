@@ -63,6 +63,7 @@ namespace ZavodConservDatabaseImplement.Implements
             {
                 return context.Orders
                 .Where(rec => model == null || rec.Id == model.Id)
+                .Include(rec => rec.Conserv)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
