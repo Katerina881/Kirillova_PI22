@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZavodConservbusinessLogic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZavodConservListImplement", "ZavodConservListImplement\ZavodConservListImplement.csproj", "{ABBD8FFE-F4A8-4B52-9271-C7047369A93C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservFileImplement", "ZavodConservFileImplement\ZavodConservFileImplement.csproj", "{8640E275-8B24-4D02-A6FC-8966A0B78B36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZavodConservFileImplement", "ZavodConservFileImplement\ZavodConservFileImplement.csproj", "{8640E275-8B24-4D02-A6FC-8966A0B78B36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZavodConservDatabaseImplement", "ZavodConservDatabaseImplement\ZavodConservDatabaseImplement.csproj", "{59068F01-23C5-4C68-A379-DD3360D4B16A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8640E275-8B24-4D02-A6FC-8966A0B78B36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59068F01-23C5-4C68-A379-DD3360D4B16A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59068F01-23C5-4C68-A379-DD3360D4B16A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59068F01-23C5-4C68-A379-DD3360D4B16A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59068F01-23C5-4C68-A379-DD3360D4B16A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
