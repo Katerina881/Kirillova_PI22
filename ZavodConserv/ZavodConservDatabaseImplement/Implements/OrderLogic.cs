@@ -67,6 +67,7 @@ namespace ZavodConservDatabaseImplement.Implements
                      || (rec.Id == model.Id && model.Id.HasValue)
                      || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
                  )
+                 .Include(rec => rec.Conserv)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,
