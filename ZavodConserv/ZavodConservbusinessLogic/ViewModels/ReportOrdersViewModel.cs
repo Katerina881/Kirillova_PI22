@@ -9,6 +9,8 @@ namespace ZavodConservbusinessLogic.ViewModels
 
         public string ConservName { get; set; }
 
+        public string ClientFIO { get; set; }
+
         public int Count { get; set; }
 
         public decimal Sum { get; set; }
