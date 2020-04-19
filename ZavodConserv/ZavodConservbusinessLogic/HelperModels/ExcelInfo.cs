@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ZavodConservbusinessLogic.ViewModels;
 
 namespace ZavodConservbusinessLogic.HelperModels
@@ -9,9 +11,7 @@ namespace ZavodConservbusinessLogic.HelperModels
 
         public string Title { get; set; }
 
-        public List<ReportConservComponentViewModel> ConservComponents { get; set; }
-
-        public List<ReportOrdersViewModel> Orders { get; set; }
+        public List<IGrouping<DateTime, OrderViewModel>> Orders { get; set; }
 
     }
 }

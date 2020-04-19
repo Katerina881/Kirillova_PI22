@@ -16,12 +16,9 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
         {
             using (SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(info.FileName, SpreadsheetDocumentType.Workbook))
             {
-                // Создаем книгу (в ней хранятся листы)
                 WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
                 workbookpart.Workbook = new Workbook();
                 CreateStyles(workbookpart);
-
-                // Получаем/создаем хранилище текстов для книги
                 SharedStringTablePart shareStringPart =
                 spreadsheetDocument.WorkbookPart.GetPartsOfType<SharedStringTablePart>().Count() > 0
                 ?
@@ -29,17 +26,12 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                 :
                 spreadsheetDocument.WorkbookPart.AddNewPart<SharedStringTablePart>();
 
-                // Создаем SharedStringTable, если его нет
                 if (shareStringPart.SharedStringTable == null)
                 {
                     shareStringPart.SharedStringTable = new SharedStringTable();
                 }
-
-                // Создаем лист в книгу
                 WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
                 worksheetPart.Worksheet = new Worksheet(new SheetData());
-
-                // Добавляем лист в книгу
                 Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
                 Sheet sheet = new Sheet()
                 {
@@ -67,17 +59,7 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                 });
 
                 uint rowIndex = 2;
-
-                List<DateTime> dates = new List<DateTime>();
-                foreach (var order in info.Orders)
-                {
-                    if (!dates.Contains(order.DateCreate.Date))
-                    {
-                        dates.Add(order.DateCreate.Date);
-                    }
-                }
-
-                foreach (var date in dates)
+                foreach (var date in info.Orders)
                 {
                     decimal dateSum = 0;
 
@@ -87,13 +69,13 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                         ShareStringPart = shareStringPart,
                         ColumnName = "A",
                         RowIndex = rowIndex,
-                        Text = date.Date.ToString(),
+                        Text = date.Key.ToString(),
                         StyleIndex = 0U
                     });
 
                     rowIndex++;
 
-                    foreach (var order in info.Orders.Where(rec => rec.DateCreate.Date == date.Date))
+                    foreach (var order in date)
                     {
                         InsertCellInWorksheet(new ExcelCellParameters
                         {

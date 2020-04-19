@@ -25,43 +25,38 @@ IOrderLogic orderLLogic)
 
         public List<ReportConservComponentViewModel> GetConservComponent()
         {
-            var components = componentLogic.Read(null);
-            var products = ConservLogic.Read(null);
+            var conservs = ConservLogic.Read(null);
             var list = new List<ReportConservComponentViewModel>();
 
-            foreach (var product in products)
+            foreach (var conserv in conservs)
             {
-                foreach (var component in components)
+                foreach (var rec in conserv.ConservComponents)
                 {
-                    if (product.ConservComponents.ContainsKey(component.Id))
+                    var record = new ReportConservComponentViewModel
                     {
-                        var record = new ReportConservComponentViewModel
-                        {
-                            ConservName = product.ConservName,
-                            ComponentName = component.ComponentName,
-                            TotalCount = product.ConservComponents[component.Id].Item2
-                        };
-                        list.Add(record);
-                    }
+                        ConservName = conserv.ConservName,
+                        ComponentName = rec.Value.Item1,
+                        TotalCount = rec.Value.Item2
+                    };
+                    list.Add(record);
                 }
             }
             return list;
         }
 
-        public List<ReportOrdersViewModel> GetOrders(ReportBindingModel model)
+        public List<IGrouping<DateTime, OrderViewModel>> GetOrders(ReportBindingModel model)
         {
-            return orderLogic.Read(new OrderBindingModel
+            var list = orderLogic
+            .Read(new OrderBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
-            }).Select(x => new ReportOrdersViewModel
-            {
-                DateCreate = x.DateCreate,
-                ConservName = x.ConservName,
-                Count = x.Count,
-                Sum = x.Sum,
-                Status = x.Status
-            }).ToList();
+            })
+            .GroupBy(rec => rec.DateCreate.Date)
+            .OrderBy(recG => recG.Key)
+            .ToList();
+
+            return list;
         }
 
         public void SaveComponentsToWordFile(ReportBindingModel model)
