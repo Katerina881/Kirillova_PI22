@@ -7,7 +7,7 @@ using System.ComponentModel;
 namespace ZavodConservbusinessLogic.ViewModels
 {
     [DataContract]
-    class ClientViewModel
+    public class ClientViewModel
     {
         [DataMember]
         public int ClientId { get; set; }
@@ -15,6 +15,12 @@ namespace ZavodConservbusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
+
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public string Password { get; set; }
 
     }
 }

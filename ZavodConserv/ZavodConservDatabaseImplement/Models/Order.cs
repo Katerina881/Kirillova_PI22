@@ -11,6 +11,8 @@ namespace ZavodConservDatabaseImplement.Models
 
         public int ConservId { get; set; }
 
+        public int ClientId { get; set; }
+
         [Required]
         public int Count { get; set; }
 

@@ -6,10 +6,19 @@ using System.Runtime.Serialization;
 namespace ZavodConservbusinessLogic.BindingModels
 {
     [DataContract]
-    class ClientBindingModel
+    public class ClientBindingModel
     {
         [DataMember]
         public int ClientId { get; set; }
+
+        [DataMember]
+        public string ClientFIO { get; set; }
+
+        [DataMember]
+        public string Email { get; set; }
+
+        [DataMember]
+        public string Password { get; set; }
 
     }
 }

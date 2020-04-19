@@ -66,17 +66,20 @@ namespace ZavodConservDatabaseImplement.Implements
                      rec => model == null
                      || (rec.Id == model.Id && model.Id.HasValue)
                      || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                 )
+                     || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
                  .Include(rec => rec.Conserv)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,
                      ConservId = rec.ConservId,
+                     ClientId = rec.ClientId,
                      DateCreate = rec.DateCreate,
                      DateImplement = rec.DateImplement,
                      Status = rec.Status,
                      Count = rec.Count,
                      Sum = rec.Sum,
+                     ClientFIO = rec.Clients.FirstOrDefault(recC => recC.Id ==
+rec.ClientId)?.ClientFIO,
                      ConservName = rec.Conserv.ConservName
                  })
                  .ToList();
