@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using ZavodConservbusinessLogic.BindingModels;
 
 namespace ZavodConservClientView
 {
@@ -34,7 +35,7 @@ namespace ZavodConservClientView
                     });
                     MessageBox.Show("Обновление прошло успешно", "Сообщение",
                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Program.Client.ClientFIO = textBoxClientFIO.Text;
+                    Program.Client.FIO = textBoxClientFIO.Text;
                     Program.Client.Email = textBoxEmail.Text;
                     Program.Client.Password = textBoxPassword.Text;
                     Close();

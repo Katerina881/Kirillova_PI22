@@ -21,10 +21,10 @@ namespace ZavodConservClientView
         {
             try
             {
-                comboBoxProduct.DisplayMember = "ProductName";
+                comboBoxProduct.DisplayMember = "ConservName";
                 comboBoxProduct.ValueMember = "Id";
                 comboBoxProduct.DataSource =
-               APIClient.GetRequest<List<ConservViewModel>>("api/main/getproductlist");
+               APIClient.GetRequest<List<ConservViewModel>>("api/main/getconservlist");
                 comboBoxProduct.SelectedItem = null;
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace ZavodConservClientView
                 {
                     int id = Convert.ToInt32(comboBoxProduct.SelectedValue);
                     ConservViewModel product =
-APIClient.GetRequest<ConservViewModel>($"api/main/getproduct?productId={id}");
+APIClient.GetRequest<ConservViewModel>($"api/main/getconserv?conservId={id}");
                     int count = Convert.ToInt32(textBoxCount.Text);
                     textBoxSum.Text = (count * product.Price).ToString();
                 }

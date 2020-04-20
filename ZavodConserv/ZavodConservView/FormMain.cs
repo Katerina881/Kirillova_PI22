@@ -63,6 +63,12 @@ namespace ZavodConservView
             form.ShowDialog();
         }
 
+        private void клиентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClients>();
+            form.ShowDialog();
+        }
+
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();

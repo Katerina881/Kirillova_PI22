@@ -29,7 +29,7 @@ namespace ZavodConservClientView
             {
                 try
                 {
-                    Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={textBoxEmail.Text}&password ={ textBoxPassword.Text}");
+                    Program.Client = APIClient.GetRequest<ClientViewModel>($"api/client/login?login={textBoxEmail.Text}&password={ textBoxPassword.Text}");
                 Close();
                 }
                 catch (Exception ex)

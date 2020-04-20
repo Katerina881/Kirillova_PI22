@@ -261,6 +261,9 @@
     <EmbeddedResource Include="FormClientOrders.resx">
       <DependentUpon>FormClientOrders.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormClients.resx">
+      <DependentUpon>FormClients.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormComponent.resx">
       <DependentUpon>FormComponent.cs</DependentUpon>
     </EmbeddedResource>

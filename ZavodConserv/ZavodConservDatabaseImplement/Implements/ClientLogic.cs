@@ -36,7 +36,8 @@ namespace ZavodConservDatabaseImplement.Implements
                     element = new Client();
                     context.Clients.Add(element);
                 }
-
+                element.FIO = model.FIO;
+                element.Password = model.Password;
                 element.Email = model.Email;
 
                 context.SaveChanges();
