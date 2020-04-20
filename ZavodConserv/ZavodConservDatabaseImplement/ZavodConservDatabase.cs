@@ -22,5 +22,7 @@ namespace ZavodConservDatabaseImplement
         public virtual DbSet<ConservComponent> ConservComponents { set; get; }
 
         public virtual DbSet<Order> Orders { set; get; }
+
+        public virtual DbSet<Client> Clients { set; get; }
     }
 }

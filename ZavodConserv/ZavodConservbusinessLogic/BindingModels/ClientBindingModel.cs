@@ -3,18 +3,18 @@
 namespace ZavodConservbusinessLogic.BindingModels
 {
     [DataContract]
-    public class CreateOrderBindingModel
+    public class ClientBindingModel
     {
         [DataMember]
-        public int ConservId { get; set; }
+        public int? Id { get; set; }
 
         [DataMember]
-        public int ClientId { get; set; }
+        public string FIO { get; set; }
 
         [DataMember]
-        public int Count { get; set; }
+        public string Email { get; set; }
 
         [DataMember]
-        public decimal Sum { get; set; }
+        public string Password { get; set; }
     }
 }

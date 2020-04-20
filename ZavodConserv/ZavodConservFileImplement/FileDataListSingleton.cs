@@ -13,21 +13,28 @@ namespace ZavodConservFileImplement
     public class FileDataListSingleton
     {
         private static FileDataListSingleton instance;
+
         private readonly string ComponentFileName = "Component.xml";
         private readonly string OrderFileName = "Order.xml";
         private readonly string ConservFileName = "Conserv.xml";
         private readonly string ConservComponentFileName = "ConservComponent.xml";
+        private readonly string ClientFileName = "Client.xml";
+
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Conserv> Conservs { get; set; }
         public List<ConservComponent> ConservComponents { get; set; }
+        public List<Client> Clients { get; set; }
+
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Conservs = LoadConservs();
             ConservComponents = LoadConservComponents();
+            Clients = LoadClients();
         }
+
         public static FileDataListSingleton GetInstance()
         {
             if (instance == null)
@@ -36,13 +43,16 @@ namespace ZavodConservFileImplement
             }
             return instance;
         }
+
         ~FileDataListSingleton()
         {
             SaveComponents();
             SaveOrders();
             SaveConservs();
             SaveConservComponents();
+            SaveClients();
         }
+
         private List<Component> LoadComponents()
         {
             var list = new List<Component>();
@@ -61,6 +71,7 @@ namespace ZavodConservFileImplement
             }
             return list;
         }
+
         private List<Order> LoadOrders()
         {
             var list = new List<Order>();
@@ -73,21 +84,19 @@ namespace ZavodConservFileImplement
                     list.Add(new Order
                     {
                         Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        ClientId = Convert.ToInt32(elem.Element("ClientId").Value),
                         ConservId = Convert.ToInt32(elem.Element("ConservId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
-                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus),
-                   elem.Element("Status").Value),
-                        DateCreate =
-                   Convert.ToDateTime(elem.Element("DateCreate").Value),
-                        DateImplement =
-                   string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null :
-                   Convert.ToDateTime(elem.Element("DateImplement").Value),
+                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus),elem.Element("Status").Value),
+                        DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
+                        DateImplement = string.IsNullOrEmpty(elem.Element("DateImplement").Value) ? (DateTime?)null : Convert.ToDateTime(elem.Element("DateImplement").Value),
                     });
                 }
             }
             return list;
         }
+
         private List<Conserv> LoadConservs()
         {
             var list = new List<Conserv>();
@@ -107,6 +116,7 @@ namespace ZavodConservFileImplement
             }
             return list;
         }
+
         private List<ConservComponent> LoadConservComponents()
         {
             var list = new List<ConservComponent>();
@@ -127,6 +137,31 @@ namespace ZavodConservFileImplement
             }
             return list;
         }
+
+        private List<Client> LoadClients()
+        {
+            var list = new List<Client>();
+
+            if (File.Exists(ClientFileName))
+            {
+                XDocument xDocument = XDocument.Load(ClientFileName);
+                var xElements = xDocument.Root.Elements("Client").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Client
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        FIO = elem.Element("FIO").Value,
+                        Email = elem.Element("Email").Value,
+                        Password = elem.Element("Password").Value
+                    });
+                }
+            }
+
+            return list;
+        }
+
         private void SaveComponents()
         {
             if (Components != null)
@@ -142,6 +177,7 @@ namespace ZavodConservFileImplement
                 xDocument.Save(ComponentFileName);
             }
         }
+
         private void SaveOrders()
         {
             if (Orders != null)
@@ -151,6 +187,7 @@ namespace ZavodConservFileImplement
                 {
                     xElement.Add(new XElement("Order",
                     new XAttribute("Id", order.Id),
+                    new XElement("ClientId", order.ClientId),
                     new XElement("ConservId", order.ConservId),
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
@@ -193,6 +230,26 @@ namespace ZavodConservFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ConservComponentFileName);
+            }
+        }
+
+        private void SaveClients()
+        {
+            if (Clients != null)
+            {
+                var xElement = new XElement("Clients");
+
+                foreach (var client in Clients)
+                {
+                    xElement.Add(new XElement("Client",
+                    new XAttribute("Id", client.Id),
+                    new XElement("FIO", client.FIO),
+                    new XElement("Email", client.Email),
+                    new XElement("Password", client.Password)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(ClientFileName);
             }
         }
     }

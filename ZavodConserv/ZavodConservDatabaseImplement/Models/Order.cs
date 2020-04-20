@@ -9,6 +9,8 @@ namespace ZavodConservDatabaseImplement.Models
     {
         public int Id { get; set; }
 
+        public int ClientId { get; set; }
+
         public int ConservId { get; set; }
 
         [Required]
@@ -26,5 +28,7 @@ namespace ZavodConservDatabaseImplement.Models
         public DateTime? DateImplement { get; set; }
 
         public virtual Conserv Conserv { get; set; }
+
+        public Client Client { get; set; }
     }
 }

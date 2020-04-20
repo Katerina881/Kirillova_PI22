@@ -61,26 +61,28 @@ namespace ZavodConservListImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             List<OrderViewModel> result = new List<OrderViewModel>();
-            foreach (var Order in source.Orders)
+            foreach (var order in source.Orders)
             {
-                if (model != null)
+                if (
+                    model != null && order.Id == model.Id
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId
+                )
                 {
-                    if (Order.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(Order));
-                        break;
-                    }
-                    continue;
+                    result.Add(CreateViewModel(order));
+                    break;
                 }
-                result.Add(CreateViewModel(Order));
+
+                result.Add(CreateViewModel(order));
             }
             return result;
         }
 
         private Order CreateModel(OrderBindingModel model, Order Order)
         {
-            Order.ConservId = model.ConservId == 0 ? Order.ConservId : model.ConservId;
+            Order.ConservId = model.ConservId;
             Order.Count = model.Count;
+            Order.ClientId = (int)model.ClientId;
             Order.Sum = model.Sum;
             Order.Status = model.Status;
             Order.DateCreate = model.DateCreate;
@@ -90,19 +92,27 @@ namespace ZavodConservListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order Order)
         {
-            string ConservName = "";
-            for (int j = 0; j < source.Conservs.Count; ++j)
+            string conservName = null;
+
+            foreach (var conserv in source.Conservs)
             {
-                if (source.Conservs[j].Id == Order.ConservId)
+                if (conserv.Id == Order.ConservId)
                 {
-                    ConservName = source.Conservs[j].ConservName;
-                    break;
+                    conservName = conserv.ConservName;
                 }
             }
+
+            if (conservName == null)
+            {
+                throw new Exception("Продукт не найден");
+            }
+
             return new OrderViewModel
             {
                 Id = Order.Id,
-                ConservName = ConservName,
+                ClientId = Order.ClientId,
+                ConservId = Order.ConservId,
+                ConservName = conservName,
                 Count = Order.Count,
                 Sum = Order.Sum,
                 Status = Order.Status,

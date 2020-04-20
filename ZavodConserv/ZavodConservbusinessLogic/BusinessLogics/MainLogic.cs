@@ -17,6 +17,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 ConservId = model.ConservId,
+                ClientId = model.ClientId,
                 Count = model.Count,
                 Sum = model.Sum,
                 DateCreate = DateTime.Now,
@@ -40,6 +41,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ConservId = order.ConservId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -62,6 +64,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ConservId = order.ConservId,
                 Count = order.Count,
                 Sum = order.Sum,
@@ -84,6 +87,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
             orderLogic.CreateOrUpdate(new OrderBindingModel
             {
                 Id = order.Id,
+                ClientId = order.ClientId,
                 ConservId = order.ConservId,
                 Count = order.Count,
                 Sum = order.Sum,

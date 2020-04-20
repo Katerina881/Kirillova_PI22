@@ -30,14 +30,14 @@ namespace ZavodConservFileImplement.Implements
             }
             else
             {
-                int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec =>
-               rec.Id) : 0;
+                int maxId = source.Orders.Count > 0 ? source.Orders.Max(rec => rec.Id) : 0;
                 element = new Order { Id = maxId + 1 };
                 source.Orders.Add(element);
             }
 
             element.Status = model.Status;
             element.ConservId = model.ConservId == 0 ? element.ConservId : model.ConservId;
+            element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
             element.Count = model.Count;
             element.Sum = model.Sum;
             element.DateCreate = model.DateCreate;
@@ -61,27 +61,26 @@ namespace ZavodConservFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-            .Where(rec => model == null || rec.Id == model.Id)
+            .Where(
+                rec => model == null 
+                || rec.Id == model.Id
+                || model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo
+                || model.ClientId.HasValue && rec.ClientId == model.ClientId
+                )
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
-                Count = rec.Count,
-                ConservName = GetConservName(rec.ConservId),
-                DateCreate = rec.DateCreate,
-                DateImplement = rec.DateImplement,
+                ClientId = rec.ClientId,
                 ConservId = rec.ConservId,
+                ClientFIO = source.Clients.FirstOrDefault(recC => recC.Id == rec.ClientId)?.FIO,
+                ConservName = source.Conservs.FirstOrDefault(recP => recP.Id == rec.ConservId)?.ConservName,
+                Count = rec.Count,
+                Sum = rec.Sum,
                 Status = rec.Status,
-                Sum = rec.Sum
+                DateCreate = rec.DateCreate,
+                DateImplement = rec.DateImplement
             })
             .ToList();
-        }
-
-        private string GetConservName(int id)
-        {
-            string name = "";
-            var conserv = source.Conservs.FirstOrDefault(x => x.Id == id);
-            name = conserv != null ? conserv.ConservName : "";
-            return name;
         }
     }
 }

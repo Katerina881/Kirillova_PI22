@@ -17,4 +17,8 @@
     <ProjectReference Include="..\ZavodConservbusinessLogic\ZavodConservbusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

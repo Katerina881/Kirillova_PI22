@@ -21,13 +21,14 @@ namespace ZavodConservView
         public new IUnityContainer Container { get; set; }
 
         private readonly IConservLogic logicP;
-
+        private readonly IClientLogic logicC;
         private readonly MainLogic logicM;
 
-        public FormCreateOrder(IConservLogic logicP, MainLogic logicM)
+        public FormCreateOrder(IConservLogic logicP, IClientLogic logicC, MainLogic logicM)
         {
             InitializeComponent();
             this.logicP = logicP;
+            this.logicC = logicC;
             this.logicM = logicM;
         }
 
@@ -42,6 +43,16 @@ namespace ZavodConservView
                     comboBoxConserv.DisplayMember = "ConservName";
                     comboBoxConserv.ValueMember = "Id";
                     comboBoxConserv.SelectedItem = null;
+                }
+
+                var listC = logicC.Read(null);
+
+                if (listC != null)
+                {
+                    comboBoxClient.DisplayMember = "FIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listC;
+                    comboBoxClient.SelectedItem = null;
                 }
             } 
             catch (Exception ex) 
@@ -89,12 +100,18 @@ namespace ZavodConservView
             { 
                 MessageBox.Show("Выберите изделие", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return; 
-            } 
+            }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             { 
                 logicM.CreateOrder(new CreateOrderBindingModel 
                 {
-                    ConservId = Convert.ToInt32(comboBoxConserv.SelectedValue), 
+                    ConservId = Convert.ToInt32(comboBoxConserv.SelectedValue),
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text), 
                     Sum = Convert.ToDecimal(textBoxSum.Text)
                 }); 
