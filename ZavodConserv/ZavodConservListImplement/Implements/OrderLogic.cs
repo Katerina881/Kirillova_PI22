@@ -61,18 +61,17 @@ namespace ZavodConservListImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             List<OrderViewModel> result = new List<OrderViewModel>();
-            foreach (var Order in source.Orders)
+            foreach (var order in source.Orders)
             {
-                if (model != null)
+                if (model != null && order.Id == model.Id
+                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                )
                 {
-                    if (Order.Id == model.Id)
-                    {
-                        result.Add(CreateViewModel(Order));
-                        break;
-                    }
-                    continue;
+                    result.Add(CreateViewModel(order));
+                    break;
                 }
-                result.Add(CreateViewModel(Order));
+
+                result.Add(CreateViewModel(order));
             }
             return result;
         }
@@ -88,26 +87,31 @@ namespace ZavodConservListImplement.Implements
             return Order;
         }
 
-        private OrderViewModel CreateViewModel(Order Order)
+        private OrderViewModel CreateViewModel(Order order)
         {
-            string ConservName = "";
-            for (int j = 0; j < source.Conservs.Count; ++j)
+            string conservName = "";
+            foreach (var product in source.Conservs)
             {
-                if (source.Conservs[j].Id == Order.ConservId)
+                if (product.Id == order.ConservId)
                 {
-                    ConservName = source.Conservs[j].ConservName;
-                    break;
+                    conservName = product.ConservName;
                 }
+            }
+
+            if (conservName == null)
+            {
+                throw new Exception("Продукт не найден");
             }
             return new OrderViewModel
             {
-                Id = Order.Id,
-                ConservName = ConservName,
-                Count = Order.Count,
-                Sum = Order.Sum,
-                Status = Order.Status,
-                DateCreate = Order.DateCreate,
-                DateImplement = Order.DateImplement
+                Id = order.Id,
+                ConservId = order.ConservId,
+                ConservName = conservName,
+                Count = order.Count,
+                Sum = order.Sum,
+                Status = order.Status,
+                DateCreate = order.DateCreate,
+                DateImplement = order.DateImplement
             };
         }
     }

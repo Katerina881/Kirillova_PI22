@@ -14,12 +14,15 @@ namespace ZavodConservView
 
         private readonly MainLogic logic;
 
+        private readonly ReportLogic report;
+
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, IOrderLogic orderLogic)
+        public FormMain(MainLogic logic, ReportLogic report, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
+            this.report = report;
             this.orderLogic = orderLogic;
         }
 
@@ -118,6 +121,30 @@ namespace ZavodConservView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void ComponentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var dialog = new SaveFileDialog { Filter = "docx|*.docx" })
+            {
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    report.SaveComponentsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
+
+        private void ComponentConservToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormReportConservComponents>();
+            form.ShowDialog();
+        }
+
+        private void OrdersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormClientOrders>(); 
+            form.ShowDialog();
         }
     }
 }

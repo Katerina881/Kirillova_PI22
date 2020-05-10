@@ -61,12 +61,16 @@ namespace ZavodConservFileImplement.Implements
         public List<OrderViewModel> Read(OrderBindingModel model)
         {
             return source.Orders
-            .Where(rec => model == null || rec.Id == model.Id)
+            .Where(
+                rec => model == null 
+                || (rec.Id == model.Id && model.Id.HasValue)
+                || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+            )
             .Select(rec => new OrderViewModel
             {
                 Id = rec.Id,
                 Count = rec.Count,
-                ConservName = GetConservName(rec.ConservId),
+                ConservName = source.Conservs.FirstOrDefault(recP => recP.Id == rec.ConservId)?.ConservName,
                 DateCreate = rec.DateCreate,
                 DateImplement = rec.DateImplement,
                 ConservId = rec.ConservId,
@@ -74,14 +78,6 @@ namespace ZavodConservFileImplement.Implements
                 Sum = rec.Sum
             })
             .ToList();
-        }
-
-        private string GetConservName(int id)
-        {
-            string name = "";
-            var conserv = source.Conservs.FirstOrDefault(x => x.Id == id);
-            name = conserv != null ? conserv.ConservName : "";
-            return name;
         }
     }
 }

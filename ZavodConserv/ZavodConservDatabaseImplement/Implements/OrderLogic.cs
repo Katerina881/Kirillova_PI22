@@ -62,20 +62,24 @@ namespace ZavodConservDatabaseImplement.Implements
             using (var context = new ZavodConservDatabase())
             {
                 return context.Orders
-                .Where(rec => model == null || rec.Id == model.Id)
-                .Include(rec => rec.Conserv)
-                .Select(rec => new OrderViewModel
-                {
-                    Id = rec.Id,
-                    Count = rec.Count,
-                    ConservName = rec.Conserv.ConservName,
-                    DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement,
-                    ConservId = rec.ConservId,
-                    Status = rec.Status,
-                    Sum = rec.Sum
-                })
-                .ToList();
+                 .Where(
+                     rec => model == null
+                     || (rec.Id == model.Id && model.Id.HasValue)
+                     || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                 )
+                 .Include(rec => rec.Conserv)
+                 .Select(rec => new OrderViewModel
+                 {
+                     Id = rec.Id,
+                     ConservId = rec.ConservId,
+                     DateCreate = rec.DateCreate,
+                     DateImplement = rec.DateImplement,
+                     Status = rec.Status,
+                     Count = rec.Count,
+                     Sum = rec.Sum,
+                     ConservName = rec.Conserv.ConservName
+                 })
+                 .ToList();
             }
         }
     }
