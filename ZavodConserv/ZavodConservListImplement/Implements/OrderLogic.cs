@@ -90,7 +90,7 @@ namespace ZavodConservListImplement.Implements
             return Order;
         }
 
-        private OrderViewModel CreateViewModel(Order Order)
+        private OrderViewModel CreateViewModel(Order order)
         {
             string conservName = null;
 
@@ -106,7 +106,6 @@ namespace ZavodConservListImplement.Implements
             {
                 throw new Exception("Продукт не найден");
             }
-
             return new OrderViewModel
             {
                 Id = Order.Id,
