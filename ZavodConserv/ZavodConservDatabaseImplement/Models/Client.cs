@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ZavodConservDatabaseImplement.Models
 {
@@ -14,5 +15,7 @@ namespace ZavodConservDatabaseImplement.Models
 
         [Required]
         public string Password { get; set; }
+
+        public List<Order> Orders { get; set; }
     }
 }

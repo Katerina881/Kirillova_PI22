@@ -7,6 +7,7 @@ using ZavodConservDatabaseImplement.Models;
 using System.Linq;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using ZavodConservbusinessLogic.Enums;
 
 namespace ZavodConservDatabaseImplement.Implements
 {
@@ -32,7 +33,8 @@ namespace ZavodConservDatabaseImplement.Implements
                 }
                 element.Status = model.Status;
                 element.ConservId = model.ConservId == 0 ? element.ConservId : model.ConservId;
-                element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
+                element.ClientId = model.ClientId.Value;
+                element.ImplementerId = model.ImplementerId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.DateCreate = model.DateCreate;
@@ -68,13 +70,17 @@ namespace ZavodConservDatabaseImplement.Implements
                      || (rec.Id == model.Id && model.Id.HasValue)
                      || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
                      || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
+                     || (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue)
+                     || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)
                  )
                  .Include(rec => rec.Conserv)
                  .Include(rec => rec.Client)
+                 .Include(rec => rec.Implementer)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,
                      ClientId = rec.ClientId,
+                     ImplementerId = rec.ImplementerId,
                      ConservId = rec.ConservId,
                      DateCreate = rec.DateCreate,
                      DateImplement = rec.DateImplement,
@@ -82,7 +88,8 @@ namespace ZavodConservDatabaseImplement.Implements
                      Count = rec.Count,
                      Sum = rec.Sum,
                      ConservName = rec.Conserv.ConservName,
-                     ClientFIO = rec.Client.FIO
+                     ClientFIO = rec.Client.FIO,
+                     ImplementerFIO = rec.ImplementerId.HasValue ? rec.Implementer.ImplementerFIO : string.Empty
                  })
                  .ToList();
             }
