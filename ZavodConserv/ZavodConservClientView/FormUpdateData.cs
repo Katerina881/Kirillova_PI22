@@ -29,6 +29,7 @@ namespace ZavodConservClientView
                 {
                     APIClient.PostRequest("api/client/updatedata", new ClientBindingModel
                     {
+                        Id = Program.Client.Id,
                         FIO = textBoxClientFIO.Text,
                         Email = textBoxEmail.Text,
                         Password = textBoxPassword.Text
