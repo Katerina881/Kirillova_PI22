@@ -86,6 +86,12 @@ namespace ZavodConservView
             LoadData();
         }
 
+        private void buttonMessages_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormMessages>();
+            form.ShowDialog();
+        }
+
         private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
         {
             work.DoWork();
