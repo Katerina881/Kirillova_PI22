@@ -17,12 +17,15 @@ namespace ZavodConservListImplement
 
         public List<ConservComponent> ConservComponents { get; set; }
 
+        public List<Client> Clients { get; set; }
+
         private DataListSingleton()
         {
             Components = new List<Component>();
             Orders = new List<Order>(); 
             Conservs = new List<Conserv>();
             ConservComponents = new List<ConservComponent>();
+            Clients = new List<Client>();
         }
 
         public static DataListSingleton GetInstance()

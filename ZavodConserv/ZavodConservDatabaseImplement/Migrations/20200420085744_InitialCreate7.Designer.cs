@@ -10,8 +10,8 @@ using ZavodConservDatabaseImplement;
 namespace ZavodConservDatabaseImplement.Migrations
 {
     [DbContext(typeof(ZavodConservDatabase))]
-    [Migration("20200316112742_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200420085744_InitialCreate7")]
+    partial class InitialCreate7
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,30 @@ namespace ZavodConservDatabaseImplement.Migrations
                 .HasAnnotation("ProductVersion", "3.1.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("ZavodConservDatabaseImplement.Models.Client", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FIO")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Clients");
+                });
 
             modelBuilder.Entity("ZavodConservDatabaseImplement.Models.Component", b =>
                 {
@@ -88,6 +112,9 @@ namespace ZavodConservDatabaseImplement.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ConservId")
                         .HasColumnType("int");
 
@@ -107,6 +134,8 @@ namespace ZavodConservDatabaseImplement.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.HasIndex("ConservId");
 
@@ -130,6 +159,12 @@ namespace ZavodConservDatabaseImplement.Migrations
 
             modelBuilder.Entity("ZavodConservDatabaseImplement.Models.Order", b =>
                 {
+                    b.HasOne("ZavodConservDatabaseImplement.Models.Client", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("ZavodConservDatabaseImplement.Models.Conserv", "Conserv")
                         .WithMany("Order")
                         .HasForeignKey("ConservId")

@@ -63,8 +63,10 @@ namespace ZavodConservListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (model != null && order.Id == model.Id
+                if (
+                    model != null && order.Id == model.Id
                     || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
+                    || model.ClientId.HasValue && order.ClientId == model.ClientId
                 )
                 {
                     result.Add(CreateViewModel(order));
@@ -78,8 +80,9 @@ namespace ZavodConservListImplement.Implements
 
         private Order CreateModel(OrderBindingModel model, Order Order)
         {
-            Order.ConservId = model.ConservId == 0 ? Order.ConservId : model.ConservId;
+            Order.ConservId = model.ConservId;
             Order.Count = model.Count;
+            Order.ClientId = (int)model.ClientId;
             Order.Sum = model.Sum;
             Order.Status = model.Status;
             Order.DateCreate = model.DateCreate;
@@ -89,12 +92,13 @@ namespace ZavodConservListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order order)
         {
-            string conservName = "";
-            foreach (var product in source.Conservs)
+            string conservName = null;
+
+            foreach (var conserv in source.Conservs)
             {
-                if (product.Id == order.ConservId)
+                if (conserv.Id == Order.ConservId)
                 {
-                    conservName = product.ConservName;
+                    conservName = conserv.ConservName;
                 }
             }
 
@@ -104,14 +108,15 @@ namespace ZavodConservListImplement.Implements
             }
             return new OrderViewModel
             {
-                Id = order.Id,
-                ConservId = order.ConservId,
+                Id = Order.Id,
+                ClientId = Order.ClientId,
+                ConservId = Order.ConservId,
                 ConservName = conservName,
-                Count = order.Count,
-                Sum = order.Sum,
-                Status = order.Status,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                Count = Order.Count,
+                Sum = Order.Sum,
+                Status = Order.Status,
+                DateCreate = Order.DateCreate,
+                DateImplement = Order.DateImplement
             };
         }
     }

@@ -32,6 +32,7 @@ namespace ZavodConservDatabaseImplement.Implements
                 }
                 element.Status = model.Status;
                 element.ConservId = model.ConservId == 0 ? element.ConservId : model.ConservId;
+                element.ClientId = model.ClientId == null ? element.ClientId : (int)model.ClientId;
                 element.Count = model.Count;
                 element.Sum = model.Sum;
                 element.DateCreate = model.DateCreate;
@@ -66,18 +67,22 @@ namespace ZavodConservDatabaseImplement.Implements
                      rec => model == null
                      || (rec.Id == model.Id && model.Id.HasValue)
                      || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
+                     || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
                  )
                  .Include(rec => rec.Conserv)
+                 .Include(rec => rec.Client)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,
+                     ClientId = rec.ClientId,
                      ConservId = rec.ConservId,
                      DateCreate = rec.DateCreate,
                      DateImplement = rec.DateImplement,
                      Status = rec.Status,
                      Count = rec.Count,
                      Sum = rec.Sum,
-                     ConservName = rec.Conserv.ConservName
+                     ConservName = rec.Conserv.ConservName,
+                     ClientFIO = rec.Client.FIO
                  })
                  .ToList();
             }
