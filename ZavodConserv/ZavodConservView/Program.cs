@@ -24,10 +24,9 @@ namespace ZavodConservView
             MailLogic.MailConfig(new MailConfig
             {
                 SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
-                SmtpClientPort =
-Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
-                MailLogin = ConfigurationManager.AppSettings["kk26-2000@mail.ru"],
-                MailPassword = ConfigurationManager.AppSettings["liza553040"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
             });
             var timer = new System.Threading.Timer(new TimerCallback(MailCheck), new
            MailCheckInfo

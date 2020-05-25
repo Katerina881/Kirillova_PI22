@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using ZavodConservbusinessLogic.HelperModels;
+using System.Configuration;
+using ZavodConservbusinessLogic.BusinessLogics;
 
 namespace ZavodConservRestApi
 {
@@ -13,6 +11,13 @@ namespace ZavodConservRestApi
     {
         public static void Main(string[] args)
         {
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = ConfigurationManager.AppSettings["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(ConfigurationManager.AppSettings["SmtpClientPort"]),
+                MailLogin = ConfigurationManager.AppSettings["MailLogin"],
+                MailPassword = ConfigurationManager.AppSettings["MailPassword"],
+            });
             CreateHostBuilder(args).Build().Run();
         }
 
