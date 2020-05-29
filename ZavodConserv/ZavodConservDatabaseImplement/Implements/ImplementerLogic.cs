@@ -15,18 +15,23 @@ namespace ZavodConservDatabaseImplement.Implements
         {
             using (var context = new ZavodConservDatabase())
             {
-                Implementer element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-
-                if (element == null)
+                Implementer element;
+                if (model.Id.HasValue)
+                {
+                    element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Элемент не найден");
+                    }
+                }
+                else
                 {
                     element = new Implementer();
                     context.Implementers.Add(element);
                 }
-
                 element.ImplementerFIO = model.ImplementerFIO;
-                element.WorkingTime = model.WorkingTime;
                 element.PauseTime = model.PauseTime;
-
+                element.WorkingTime = model.WorkingTime;
                 context.SaveChanges();
             }
         }
