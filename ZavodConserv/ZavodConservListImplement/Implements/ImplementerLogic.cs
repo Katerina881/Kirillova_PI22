@@ -19,28 +19,23 @@ namespace ZavodConservListImplement.Implements
 
         public void CreateOrUpdate(ImplementerBindingModel model)
         {
-            Implementer tempImplementer = model.Id.HasValue ? null : new Implementer
-            {
-                Id = 1
-            };
+            Implementer tempImplementer = new Implementer { Id = 1 };
+            bool isImplementerExist = false;
             foreach (var implementer in source.Implementers)
             {
-                if (!model.Id.HasValue && implementer.Id >= tempImplementer.Id)
+                if (implementer.Id >= tempImplementer.Id)
                 {
                     tempImplementer.Id = implementer.Id + 1;
                 }
-                else if (model.Id.HasValue && implementer.Id == model.Id)
+                else if (implementer.Id == model.Id)
                 {
                     tempImplementer = implementer;
+                    isImplementerExist = true;
+                    break;
                 }
             }
-
-            if (model.Id.HasValue)
+            if (isImplementerExist)
             {
-                if (tempImplementer == null)
-                {
-                    throw new Exception("Элемент не найден");
-                }
                 CreateModel(model, tempImplementer);
             }
             else

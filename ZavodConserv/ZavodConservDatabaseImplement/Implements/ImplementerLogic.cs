@@ -15,16 +15,8 @@ namespace ZavodConservDatabaseImplement.Implements
         {
             using (var context = new ZavodConservDatabase())
             {
-                Implementer element;
-                if (model.Id.HasValue)
-                {
-                    element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-                    if (element == null)
-                    {
-                        throw new Exception("Элемент не найден");
-                    }
-                }
-                else
+                Implementer element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                if (element == null)
                 {
                     element = new Implementer();
                     context.Implementers.Add(element);
