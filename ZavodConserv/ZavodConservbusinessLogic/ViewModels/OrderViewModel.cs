@@ -48,7 +48,7 @@ namespace ZavodConservbusinessLogic.ViewModels
         public DateTime? DateImplement { get; set; }
 
         public override List<string> Properties() => new List<string> { "Id",
-"ClientFIO", "ProductName", "ImplementerFIO", "Count", "Sum", "Status", "DateCreate",
+"ClientFIO", "ConservName", "ImplementerFIO", "Count", "Sum", "Status", "DateCreate",
 "DateImplement" };
     }
 }

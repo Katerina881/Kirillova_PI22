@@ -22,7 +22,7 @@ namespace ZavodConservbusinessLogic.ViewModels
         public override List<string> Properties() => new List<string>
         {
             "Id",
-            "ProductName",
+            "ConservName",
             "Price"
         };
     }
