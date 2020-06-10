@@ -15,8 +15,21 @@ namespace ZavodConservDatabaseImplement.Implements
         {
             using (var context = new ZavodConservDatabase())
             {
-                Implementer element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
-                if (element == null)
+                Implementer element = context.Implementers.FirstOrDefault(rec =>
+                        rec.ImplementerFIO == model.ImplementerFIO && rec.Id != model.Id);
+                if (element != null)
+                {
+                    throw new Exception("Такой исполнитель уже существует");
+                }
+                if (model.Id.HasValue)
+                {
+                    element = context.Implementers.FirstOrDefault(rec => rec.Id == model.Id);
+                    if (element == null)
+                    {
+                        throw new Exception("Исполнитель не найден");
+                    }
+                }
+                else
                 {
                     element = new Implementer();
                     context.Implementers.Add(element);
@@ -24,7 +37,6 @@ namespace ZavodConservDatabaseImplement.Implements
                 element.ImplementerFIO = model.ImplementerFIO;
                 element.WorkingTime = model.WorkingTime;
                 element.PauseTime = model.PauseTime;
-
                 context.SaveChanges();
             }
         }
