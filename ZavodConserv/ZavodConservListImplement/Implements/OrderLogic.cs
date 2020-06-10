@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ZavodConservbusinessLogic.BindingModels;
+using ZavodConservbusinessLogic.Enums;
 using ZavodConservbusinessLogic.Interfaces;
 using ZavodConservbusinessLogic.ViewModels;
 using ZavodConservListImplement.Models;
@@ -67,6 +68,8 @@ namespace ZavodConservListImplement.Implements
                     model != null && order.Id == model.Id
                     || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
                     || model.ClientId.HasValue && order.ClientId == model.ClientId
+                    || model.FreeOrders.HasValue && model.FreeOrders.Value
+                    || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется
                 )
                 {
                     result.Add(CreateViewModel(order));

@@ -19,6 +19,8 @@ namespace ZavodConservListImplement
 
         public List<Client> Clients { get; set; }
 
+        public List<Implementer> Implementers { get; set; }
+
         private DataListSingleton()
         {
             Components = new List<Component>();
@@ -26,6 +28,7 @@ namespace ZavodConservListImplement
             Conservs = new List<Conserv>();
             ConservComponents = new List<ConservComponent>();
             Clients = new List<Client>();
+            Implementers = new List<Implementer>();
         }
 
         public static DataListSingleton GetInstance()

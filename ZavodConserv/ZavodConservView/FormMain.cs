@@ -18,11 +18,14 @@ namespace ZavodConservView
 
         private readonly IOrderLogic orderLogic;
 
-        public FormMain(MainLogic logic, ReportLogic report, IOrderLogic orderLogic)
+        private readonly WorkModeling work;
+
+        public FormMain(MainLogic logic, ReportLogic report, WorkModeling work, IOrderLogic orderLogic)
         {
             InitializeComponent();
             this.logic = logic;
             this.report = report;
+            this.work = work;
             this.orderLogic = orderLogic;
         }
 
@@ -42,7 +45,8 @@ namespace ZavodConservView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[3].Visible = false;
+                    dataGridView.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
@@ -69,11 +73,22 @@ namespace ZavodConservView
             form.ShowDialog();
         }
 
+        private void исполнителиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormImplementers>();
+            form.ShowDialog();
+        }
+
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();
             form.ShowDialog();
             LoadData();
+        }
+
+        private void запускРаботToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            work.DoWork();
         }
 
         private void buttonTakeOrderInWork_Click(object sender, EventArgs e)
