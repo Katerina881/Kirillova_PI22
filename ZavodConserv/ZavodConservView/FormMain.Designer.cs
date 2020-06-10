@@ -44,6 +44,7 @@
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.buttonMessages = new System.Windows.Forms.Button();
             this.menuStripSpravochnik.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -154,7 +155,7 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
-            this.dataGridView.Size = new System.Drawing.Size(852, 319);
+            this.dataGridView.Size = new System.Drawing.Size(864, 319);
             this.dataGridView.TabIndex = 8;
             // 
             // buttonCreateOrder
@@ -190,11 +191,22 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
+            // buttonMessages
+            // 
+            this.buttonMessages.Location = new System.Drawing.Point(885, 110);
+            this.buttonMessages.Name = "buttonMessages";
+            this.buttonMessages.Size = new System.Drawing.Size(133, 23);
+            this.buttonMessages.TabIndex = 7;
+            this.buttonMessages.Text = "Сообщения";
+            this.buttonMessages.UseVisualStyleBackColor = true;
+            this.buttonMessages.Click += new System.EventHandler(this.buttonMessages_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 345);
+            this.Controls.Add(this.buttonMessages);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonCreateOrder);
@@ -229,5 +241,6 @@
         private System.Windows.Forms.ToolStripMenuItem клиентыToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem исполнителиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem запускРаботToolStripMenuItem;
+        private System.Windows.Forms.Button buttonMessages;
     }
 }
