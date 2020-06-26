@@ -68,7 +68,6 @@ namespace ZavodConservListImplement.Implements
         }
         private ConservViewModel CreateViewModel(Conserv conserv)
         {
-            // требуется дополнительно получить список компонентов для изделия с названиями и их количество  
             Dictionary<int, (string, int)> ConservComponents = new Dictionary<int, (string, int)>();  
             foreach (var pc in source.ConservComponents)  
             {      
@@ -88,7 +87,8 @@ namespace ZavodConservListImplement.Implements
             }       
             return new ConservViewModel      
             {        
-                Id = conserv.Id, ConservName = conserv.ConservName, 
+                Id = conserv.Id,
+                ConservName = conserv.ConservName, 
                 Price = conserv.Price,          
                 ConservComponents = ConservComponents  
             }; 

@@ -64,18 +64,18 @@ namespace ZavodConservListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (
-                    model != null && order.Id == model.Id
-                    || model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo
-                    || model.ClientId.HasValue && order.ClientId == model.ClientId
-                    || model.FreeOrders.HasValue && model.FreeOrders.Value
-                    || model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется
-                )
+                if (model != null)
                 {
-                    result.Add(CreateViewModel(order));
-                    break;
+                    if (order.Id == model.Id || (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                        || (model.ClientId.HasValue && order.ClientId == model.ClientId)
+                        || (model.FreeOrders.HasValue && model.FreeOrders.Value)
+                    || (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется))
+                    {
+                        result.Add(CreateViewModel(order));
+                        break;
+                    }
+                    continue;
                 }
-
                 result.Add(CreateViewModel(order));
             }
             return result;
@@ -86,6 +86,7 @@ namespace ZavodConservListImplement.Implements
             Order.ConservId = model.ConservId;
             Order.Count = model.Count;
             Order.ClientId = (int)model.ClientId;
+            Order.ImplementerId = (int)model.ImplementerId;
             Order.Sum = model.Sum;
             Order.Status = model.Status;
             Order.DateCreate = model.DateCreate;
@@ -95,19 +96,14 @@ namespace ZavodConservListImplement.Implements
 
         private OrderViewModel CreateViewModel(Order Order)
         {
-            string conservName = null;
-
-            foreach (var conserv in source.Conservs)
+            string conservName = "";
+            for (int j = 0; j < source.Conservs.Count; ++j)
             {
-                if (conserv.Id == Order.ConservId)
+                if (source.Conservs[j].Id == Order.ConservId)
                 {
-                    conservName = conserv.ConservName;
+                    conservName = source.Conservs[j].ConservName;
+                    break;
                 }
-            }
-
-            if (conservName == null)
-            {
-                throw new Exception("Продукт не найден");
             }
 
             return new OrderViewModel

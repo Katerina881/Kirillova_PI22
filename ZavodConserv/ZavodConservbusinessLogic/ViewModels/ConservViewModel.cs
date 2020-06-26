@@ -8,7 +8,7 @@ namespace ZavodConservbusinessLogic.ViewModels
     [DataContract]
     public class ConservViewModel : BaseViewModel
     {
-        [Column(title: "Название изделия", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Название консервы", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
         public string ConservName { get; set; }
 

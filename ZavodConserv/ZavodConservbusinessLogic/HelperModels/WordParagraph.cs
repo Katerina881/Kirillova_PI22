@@ -7,6 +7,5 @@ namespace ZavodConservbusinessLogic.HelperModels
         public List<string> Texts { get; set; }
 
         public WordParagraphProperties TextProperties { get; set; }
-
     }
 }

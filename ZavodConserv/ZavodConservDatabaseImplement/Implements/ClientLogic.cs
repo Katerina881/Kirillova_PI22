@@ -19,7 +19,7 @@ namespace ZavodConservDatabaseImplement.Implements
 
                 if (element != null)
                 {
-                    throw new Exception("Уже есть компонент с таким названием");
+                    throw new Exception("Уже есть клиент с таким логином");
                 }
 
                 if (model.Id.HasValue)
@@ -39,7 +39,6 @@ namespace ZavodConservDatabaseImplement.Implements
                 element.FIO = model.FIO;
                 element.Password = model.Password;
                 element.Email = model.Email;
-
                 context.SaveChanges();
             }
         }
@@ -69,8 +68,8 @@ namespace ZavodConservDatabaseImplement.Implements
                 return context.Clients
                 .Where(
                     rec => model == null
-                    || rec.Id == model.Id
-                    || rec.Email == model.Email && rec.Password == model.Password
+                    || (rec.Id == model.Id)
+                    || (rec.Email == model.Email && rec.Password == model.Password)
                 )
                 .Select(rec => new ClientViewModel
                 {

@@ -19,7 +19,7 @@ namespace ZavodConservDatabaseImplement.Implements
                         rec.ImplementerFIO == model.ImplementerFIO && rec.Id != model.Id);
                 if (element != null)
                 {
-                    throw new Exception("Такой исполнитель уже существует");
+                    throw new Exception("Уже есть исполнитель с таким именем");
                 }
                 if (model.Id.HasValue)
                 {
@@ -64,10 +64,7 @@ namespace ZavodConservDatabaseImplement.Implements
             using (var context = new ZavodConservDatabase())
             {
                 return context.Implementers
-                .Where(
-                    rec => model == null
-                    || rec.Id == model.Id
-                )
+                .Where(rec => model == null || rec.Id == model.Id )
                 .Select(rec => new ImplementerViewModel
                 {
                     Id = rec.Id,

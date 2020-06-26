@@ -28,13 +28,13 @@ namespace ZavodConservbusinessLogic.ViewModels
         public string ClientFIO { get; set; }
 
         [DataMember]
-        [Column(title: "Консерва", gridViewAutoSize: GridViewAutoSize.Fill)]
+        [Column(title: "Консерва", width: 100)]
         public string ConservName { get; set; }
 
         [Column(title: "Количество", width: 100)]
         [DataMember]
         public int Count { get; set; }
-        [Column(title: "Сумма", width: 80)]
+        [Column(title: "Сумма", width: 50)]
         [DataMember]
         public decimal Sum { get; set; }
         [Column(title: "Статус", width: 100)]
@@ -47,8 +47,17 @@ namespace ZavodConservbusinessLogic.ViewModels
         [DataMember]
         public DateTime? DateImplement { get; set; }
 
-        public override List<string> Properties() => new List<string> { "Id",
-"ClientFIO", "ConservName", "ImplementerFIO", "Count", "Sum", "Status", "DateCreate",
-"DateImplement" };
+        public override List<string> Properties() => new List<string> 
+        { 
+            "Id",
+            "ClientFIO",
+            "ConservName",
+            "ImplementerFIO",
+            "Count",
+            "Sum",
+            "Status",
+            "DateCreate",
+            "DateImplement" 
+        };
     }
 }

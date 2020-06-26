@@ -10,8 +10,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
     {
         public static void CreateDoc(WordInfo info)
         {
-            using (WordprocessingDocument wordDocument =
-WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
+            using (WordprocessingDocument wordDocument = WordprocessingDocument.Create(info.FileName, WordprocessingDocumentType.Document))
             {
                 MainDocumentPart mainPart = wordDocument.AddMainDocumentPart(); mainPart.Document = new Document();
                 Body docBody = mainPart.Document.AppendChild(new Body());

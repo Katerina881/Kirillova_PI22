@@ -11,7 +11,5 @@ namespace ZavodConservbusinessLogic.ViewModels
 
         public int TotalCount { get; set; }
 
-        public List<Tuple<string, int>> Conservs { get; set; }
-
     }
 }

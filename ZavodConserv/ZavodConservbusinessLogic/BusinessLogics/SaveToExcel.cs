@@ -98,7 +98,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                         });
 
                         dateSum += order.Sum;
-
                         rowIndex++;
                     }
 
@@ -121,10 +120,8 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                         Text = dateSum.ToString(),
                         StyleIndex = 0U
                     });
-
                     rowIndex++;
                 }
-
                 workbookpart.Workbook.Save();
             }
         }
@@ -138,7 +135,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
             fontUsual.Append(new FontSize() { Val = 12D });
             fontUsual.Append(new DocumentFormat.OpenXml.Office2010.Excel.Color()
             {
-
                 Theme = (UInt32Value)1U
             });
             fontUsual.Append(new FontName() { Val = "Times New Roman" });
@@ -270,8 +266,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
         private static void InsertCellInWorksheet(ExcelCellParameters cellParameters)
         {
             SheetData sheetData = cellParameters.Worksheet.GetFirstChild<SheetData>();
-
-            // Ищем строку, либо добавляем ее
             Row row;
 
             if (sheetData.Elements<Row>().Where(r => r.RowIndex == cellParameters.RowIndex).Count() != 0)
@@ -284,7 +278,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                 sheetData.Append(row);
             }
 
-            // Ищем нужную ячейку
             Cell cell;
 
             if (row.Elements<Cell>().Where(c => c.CellReference.Value == cellParameters.CellReference).Count() > 0)
@@ -293,8 +286,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
             }
             else
             {
-                // Все ячейки должны быть последовательно друг за другом расположены
-                // нужно определить, после какой вставлять
                 Cell refCell = null;
 
                 foreach (Cell rowCell in row.Elements<Cell>())
@@ -311,7 +302,6 @@ namespace ZavodConservShopBusinessLogic.BusinessLogics
                 cell = newCell;
             }
 
-            // вставляем новый текст
             cellParameters.ShareStringPart.SharedStringTable.AppendChild(new SharedStringItem(new Text(cellParameters.Text)));
             cellParameters.ShareStringPart.SharedStringTable.Save();
             cell.CellValue = new CellValue((cellParameters.ShareStringPart.SharedStringTable.Elements<SharedStringItem>().Count() - 1).ToString());

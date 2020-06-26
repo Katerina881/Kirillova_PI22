@@ -13,6 +13,5 @@ namespace ZavodConservbusinessLogic.HelperModels
         public string Style { get; set; }
 
         public ParagraphAlignment ParagraphAlignment { get; set; }
-
     }
 }

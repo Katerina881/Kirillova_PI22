@@ -64,18 +64,13 @@ namespace ZavodConservDatabaseImplement.Implements
         {
             using (var context = new ZavodConservDatabase())
             {
-                return context.Orders
-                 .Where(
-                     rec => model == null
+                return context.Orders.Where(rec => model == null
                      || (rec.Id == model.Id && model.Id.HasValue)
                      || (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
                      || (model.ClientId.HasValue && rec.ClientId == model.ClientId)
                      || (model.FreeOrders.HasValue && model.FreeOrders.Value && !rec.ImplementerId.HasValue)
                      || (model.ImplementerId.HasValue && rec.ImplementerId == model.ImplementerId && rec.Status == OrderStatus.Выполняется)
                  )
-                 .Include(rec => rec.Conserv)
-                 .Include(rec => rec.Client)
-                 .Include(rec => rec.Implementer)
                  .Select(rec => new OrderViewModel
                  {
                      Id = rec.Id,

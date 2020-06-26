@@ -64,9 +64,8 @@ IOrderLogic orderLLogic)
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список компонент и консерв",
+                Title = "Список консерв",
                 Conserv = ConservLogic.Read(null),
-                Components = componentLogic.Read(null)
             });
         }
 
@@ -85,7 +84,7 @@ IOrderLogic orderLLogic)
             SaveToPdf.CreateDoc(new PdfInfo
             {
                 FileName = model.FileName,
-                Title = "Список заказов",
+                Title = "Список консерв по компонентам",
                 ConservComponents = GetConservComponent()
             });
         }

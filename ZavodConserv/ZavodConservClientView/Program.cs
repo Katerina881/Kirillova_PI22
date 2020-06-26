@@ -10,9 +10,7 @@ namespace ZavodConservClientView
     static class Program
     {
         public static ClientViewModel Client { get; set; }
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+
         [STAThread]
         static void Main()
         {
