@@ -11,9 +11,7 @@ namespace ZavodConservView
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
-
         private readonly MainLogic logic;
-
         private readonly IOrderLogic orderLogic;
 
         public FormMain(MainLogic logic, IOrderLogic orderLogic)
@@ -22,12 +20,10 @@ namespace ZavodConservView
             this.logic = logic;
             this.orderLogic = orderLogic;
         }
-
         private void FormMain_Load(object sender, EventArgs e)
         {
             LoadData();
         }
-
         private void LoadData()
         {
             try
@@ -38,31 +34,14 @@ namespace ZavodConservView
                     dataGridView.DataSource = list;
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
-                    dataGridView.Columns[7].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+               MessageBoxIcon.Error);
             }
-        }
-
-        private void компонентыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormComponents>();
-            form.ShowDialog();
-        }
-
-        private void консервыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormConservs>();
-            form.ShowDialog();
-        }
-
-        private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormWarehouses>();
-            form.ShowDialog();
         }
 
         private void buttonCreateOrder_Click(object sender, EventArgs e)
@@ -84,7 +63,8 @@ namespace ZavodConservView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
         }
@@ -101,10 +81,12 @@ namespace ZavodConservView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
         }
+
         private void buttonPayOrder_Click(object sender, EventArgs e)
         {
             if (dataGridView.SelectedRows.Count == 1)
@@ -117,7 +99,8 @@ namespace ZavodConservView
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK,
+                   MessageBoxIcon.Error);
                 }
             }
         }
@@ -126,9 +109,27 @@ namespace ZavodConservView
             LoadData();
         }
 
+        private void компонентыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormComponents>();
+            form.ShowDialog();
+        }
+
+        private void консервыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormConservs>();
+            form.ShowDialog();
+        }
+
         private void ButtonFillWarehouse_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormFillWarehouse>();
+            form.ShowDialog();
+        }
+
+        private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouses>();
             form.ShowDialog();
         }
     }

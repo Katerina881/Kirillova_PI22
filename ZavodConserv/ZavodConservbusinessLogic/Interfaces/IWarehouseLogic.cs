@@ -19,5 +19,9 @@ namespace ZavodConservbusinessLogic.Interfaces
         void DelElement(int id);
 
         void AddComponent(WarehouseComponentBindingModel model);
+
+        void DeleteFromWarehouse(int ConservId, int count);
+
+        bool CheckAvailable(int ConservId, int count);
     }
 }

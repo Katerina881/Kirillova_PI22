@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using ZavodConservbusinessLogic.BindingModels;
 using ZavodConservbusinessLogic.Interfaces;
 using ZavodConservbusinessLogic.ViewModels;
@@ -180,9 +180,11 @@ namespace ZavodConservListImplement.Implements
         {
             for (int i = 0; i < source.WarehouseComponents.Count; ++i)
             {
-                if (source.WarehouseComponents[i].WarehouseId == model.WarehouseId && source.WarehouseComponents[i].ComponentId == model.ComponentId)
+                if (source.WarehouseComponents[i].WarehouseId == model.WarehouseId &&
+                     source.WarehouseComponents[i].ComponentId == model.ComponentId)
                 {
                     source.WarehouseComponents[i].Count += model.Count;
+                    model.Id = source.WarehouseComponents[i].Id;
                     return;
                 }
             }
@@ -204,6 +206,42 @@ namespace ZavodConservListImplement.Implements
                 ComponentId = model.ComponentId,
                 Count = model.Count
             });
+        }
+
+        public bool CheckAvailable(int ConservId, int ConservsCount)
+        {
+            var ConservComponents = source.ConservComponents
+              .Where(x => x.ConservId == ConservId);
+            if (ConservComponents.Count() == 0)
+                return false;
+            foreach (var elem in ConservComponents)
+            {
+                int count = 0;
+                var warehouseComponents = source.WarehouseComponents.FindAll(x => x.ComponentId == elem.ComponentId);
+                count = warehouseComponents.Sum(x => x.Count);
+                if (count < elem.Count * ConservsCount)
+                    return false;
+            }
+            return true;
+        }
+
+        public void DeleteFromWarehouse(int ConservId, int ConservsCount)
+        {
+            var ConservComponents = source.ConservComponents.Where(x => x.ConservId == ConservId);
+            if (ConservComponents.Count() == 0) return;
+            foreach (var elem in ConservComponents)
+            {
+                int left = elem.Count * ConservsCount;
+                var warehouseComponents = source.ConservComponents.FindAll(x => x.ComponentId == elem.ComponentId);
+                foreach (var rec in warehouseComponents)
+                {
+                    int toRemove = left > rec.Count ? rec.Count : left;
+                    rec.Count -= toRemove;
+                    left -= toRemove;
+                    if (left == 0) break;
+                }
+            }
+            return;
         }
     }
 }

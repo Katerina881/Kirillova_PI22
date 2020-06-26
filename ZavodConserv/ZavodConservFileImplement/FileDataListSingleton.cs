@@ -17,16 +17,24 @@ namespace ZavodConservFileImplement
         private readonly string OrderFileName = "Order.xml";
         private readonly string ConservFileName = "Conserv.xml";
         private readonly string ConservComponentFileName = "ConservComponent.xml";
+        private readonly string WarehouseFileName = "Warehouse.xml";
+        private readonly string WarehouseComponentFileName = "WarehouseComponent.xml";
+
         public List<Component> Components { get; set; }
         public List<Order> Orders { get; set; }
         public List<Conserv> Conservs { get; set; }
         public List<ConservComponent> ConservComponents { get; set; }
+        public List<Warehouse> Warehouses { get; set; }
+        public List<WarehouseComponent> WarehouseComponents { get; set; }
+
         private FileDataListSingleton()
         {
             Components = LoadComponents();
             Orders = LoadOrders();
             Conservs = LoadConservs();
             ConservComponents = LoadConservComponents();
+            Warehouses = LoadWarehouses();
+            WarehouseComponents = LoadWarehouseComponents();
         }
         public static FileDataListSingleton GetInstance()
         {
@@ -42,6 +50,8 @@ namespace ZavodConservFileImplement
             SaveOrders();
             SaveConservs();
             SaveConservComponents();
+            SaveWarehouses();
+            SaveWarehouseComponents();
         }
         private List<Component> LoadComponents()
         {
@@ -127,6 +137,50 @@ namespace ZavodConservFileImplement
             }
             return list;
         }
+        private List<Warehouse> LoadWarehouses()
+        {
+            var list = new List<Warehouse>();
+
+            if (File.Exists(WarehouseFileName))
+            {
+                XDocument xDocument = XDocument.Load(WarehouseFileName);
+                var xElements = xDocument.Root.Elements("Warehouse").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new Warehouse
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        WarehouseName = elem.Element("WarehouseName").Value
+                    });
+                }
+            }
+
+            return list;
+        }
+        private List<WarehouseComponent> LoadWarehouseComponents()
+        {
+            var list = new List<WarehouseComponent>();
+
+            if (File.Exists(WarehouseComponentFileName))
+            {
+                XDocument xDocument = XDocument.Load(WarehouseComponentFileName);
+                var xElements = xDocument.Root.Elements("WarehouseComponent").ToList();
+
+                foreach (var elem in xElements)
+                {
+                    list.Add(new WarehouseComponent
+                    {
+                        Id = Convert.ToInt32(elem.Attribute("Id").Value),
+                        WarehouseId = Convert.ToInt32(elem.Element("WarehouseId").Value),
+                        ComponentId = Convert.ToInt32(elem.Element("ComponentId").Value),
+                        Count = Convert.ToInt32(elem.Element("Count").Value)
+                    });
+                }
+            }
+
+            return list;
+        }
         private void SaveComponents()
         {
             if (Components != null)
@@ -193,6 +247,43 @@ namespace ZavodConservFileImplement
                 }
                 XDocument xDocument = new XDocument(xElement);
                 xDocument.Save(ConservComponentFileName);
+            }
+        }
+        private void SaveWarehouses()
+        {
+            if (ConservComponents != null)
+            {
+                var xElement = new XElement("Warehouses");
+
+                foreach (var warehouse in Warehouses)
+                {
+                    xElement.Add(new XElement("Warehouse",
+                    new XAttribute("Id", warehouse.Id),
+                    new XElement("WarehouseName", warehouse.WarehouseName)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(WarehouseFileName);
+            }
+        }
+
+        private void SaveWarehouseComponents()
+        {
+            if (WarehouseComponents != null)
+            {
+                var xElement = new XElement("WarehouseComponents");
+
+                foreach (var warehouseComponent in WarehouseComponents)
+                {
+                    xElement.Add(new XElement("WarehouseComponent",
+                    new XAttribute("Id", warehouseComponent.Id),
+                    new XElement("WarehouseId", warehouseComponent.WarehouseId),
+                    new XElement("ComponentId", warehouseComponent.ComponentId),
+                    new XElement("Count", warehouseComponent.Count)));
+                }
+
+                XDocument xDocument = new XDocument(xElement);
+                xDocument.Save(WarehouseComponentFileName);
             }
         }
     }

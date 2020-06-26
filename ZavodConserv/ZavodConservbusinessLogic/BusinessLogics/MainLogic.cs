@@ -38,7 +38,11 @@ namespace ZavodConservbusinessLogic.BusinessLogics
             if (order.Status != OrderStatus.Принят) 
             { 
                 throw new Exception("Заказ не в статусе \"Принят\""); 
-            } 
+            }
+            if (!warehouseLogic.CheckAvailable(order.ConservId, order.Count))
+            {
+                throw new Exception("На складах не хватает компонентов");
+            }
             orderLogic.CreateOrUpdate(new OrderBindingModel
             { 
                 Id = order.Id, 
@@ -49,6 +53,7 @@ namespace ZavodConservbusinessLogic.BusinessLogics
                 DateImplement = DateTime.Now, 
                 Status = OrderStatus.Выполняется 
             });
+            warehouseLogic.DeleteFromWarehouse(order.ConservId, order.Count);
         }
 
         public void FinishOrder(ChangeStatusBindingModel model)
