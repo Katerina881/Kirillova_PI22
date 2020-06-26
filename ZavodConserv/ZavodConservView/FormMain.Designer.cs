@@ -31,13 +31,15 @@
             this.menuStripSpravochnik = new System.Windows.Forms.MenuStrip();
             this.справочникToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ингредиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пиццаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.консервыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonakeOrderInWork = new System.Windows.Forms.Button();
             this.buttonOrderReady = new System.Windows.Forms.Button();
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
+            this.buttonFillWarehouse = new System.Windows.Forms.Button();
             this.menuStripSpravochnik.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -50,7 +52,7 @@
             this.menuStripSpravochnik.Location = new System.Drawing.Point(0, 0);
             this.menuStripSpravochnik.Name = "menuStripSpravochnik";
             this.menuStripSpravochnik.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStripSpravochnik.Size = new System.Drawing.Size(800, 24);
+            this.menuStripSpravochnik.Size = new System.Drawing.Size(812, 24);
             this.menuStripSpravochnik.TabIndex = 7;
             this.menuStripSpravochnik.Text = "menuStrip1";
             // 
@@ -58,7 +60,8 @@
             // 
             this.справочникToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ингредиентыToolStripMenuItem,
-            this.пиццаToolStripMenuItem});
+            this.консервыToolStripMenuItem,
+            this.складыToolStripMenuItem});
             this.справочникToolStripMenuItem.Name = "справочникToolStripMenuItem";
             this.справочникToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
             this.справочникToolStripMenuItem.Text = "Справочник";
@@ -70,12 +73,19 @@
             this.ингредиентыToolStripMenuItem.Text = "Компоненты";
             this.ингредиентыToolStripMenuItem.Click += new System.EventHandler(this.компонентыToolStripMenuItem_Click);
             // 
-            // пиццаToolStripMenuItem
+            // консервыToolStripMenuItem
             // 
-            this.пиццаToolStripMenuItem.Name = "пиццаToolStripMenuItem";
-            this.пиццаToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.пиццаToolStripMenuItem.Text = "Консерва";
-            this.пиццаToolStripMenuItem.Click += new System.EventHandler(this.консервыToolStripMenuItem_Click);
+            this.консервыToolStripMenuItem.Name = "консервыToolStripMenuItem";
+            this.консервыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.консервыToolStripMenuItem.Text = "Консервы";
+            this.консервыToolStripMenuItem.Click += new System.EventHandler(this.консервыToolStripMenuItem_Click);
+            // 
+            // складыToolStripMenuItem
+            // 
+            this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+            this.складыToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.складыToolStripMenuItem.Text = "Склады";
+            this.складыToolStripMenuItem.Click += new System.EventHandler(this.СкладыToolStripMenuItem_Click);
             // 
             // dataGridView
             // 
@@ -90,7 +100,7 @@
             // 
             // buttonCreateOrder
             // 
-            this.buttonCreateOrder.Location = new System.Drawing.Point(656, 45);
+            this.buttonCreateOrder.Location = new System.Drawing.Point(656, 40);
             this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCreateOrder.Name = "buttonCreateOrder";
             this.buttonCreateOrder.Size = new System.Drawing.Size(133, 23);
@@ -101,7 +111,7 @@
             // 
             // buttonakeOrderInWork
             // 
-            this.buttonakeOrderInWork.Location = new System.Drawing.Point(656, 107);
+            this.buttonakeOrderInWork.Location = new System.Drawing.Point(656, 88);
             this.buttonakeOrderInWork.Margin = new System.Windows.Forms.Padding(2);
             this.buttonakeOrderInWork.Name = "buttonakeOrderInWork";
             this.buttonakeOrderInWork.Size = new System.Drawing.Size(133, 23);
@@ -112,7 +122,7 @@
             // 
             // buttonOrderReady
             // 
-            this.buttonOrderReady.Location = new System.Drawing.Point(656, 171);
+            this.buttonOrderReady.Location = new System.Drawing.Point(656, 133);
             this.buttonOrderReady.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOrderReady.Name = "buttonOrderReady";
             this.buttonOrderReady.Size = new System.Drawing.Size(133, 24);
@@ -123,7 +133,7 @@
             // 
             // buttonPayOrder
             // 
-            this.buttonPayOrder.Location = new System.Drawing.Point(656, 237);
+            this.buttonPayOrder.Location = new System.Drawing.Point(656, 189);
             this.buttonPayOrder.Margin = new System.Windows.Forms.Padding(2);
             this.buttonPayOrder.Name = "buttonPayOrder";
             this.buttonPayOrder.Size = new System.Drawing.Size(133, 25);
@@ -134,7 +144,7 @@
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(656, 300);
+            this.buttonRef.Location = new System.Drawing.Point(656, 240);
             this.buttonRef.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRef.Name = "buttonRef";
             this.buttonRef.Size = new System.Drawing.Size(133, 24);
@@ -143,11 +153,22 @@
             this.buttonRef.UseVisualStyleBackColor = true;
             this.buttonRef.Click += new System.EventHandler(this.buttonRef_Click);
             // 
+            // buttonFillWarehouse
+            // 
+            this.buttonFillWarehouse.Location = new System.Drawing.Point(656, 301);
+            this.buttonFillWarehouse.Name = "button1";
+            this.buttonFillWarehouse.Size = new System.Drawing.Size(133, 27);
+            this.buttonFillWarehouse.TabIndex = 14;
+            this.buttonFillWarehouse.Text = "Пополнить склад";
+            this.buttonFillWarehouse.UseVisualStyleBackColor = true;
+            this.buttonFillWarehouse.Click += new System.EventHandler(this.ButtonFillWarehouse_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 387);
+            this.ClientSize = new System.Drawing.Size(812, 359);
+            this.Controls.Add(this.buttonFillWarehouse);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonOrderReady);
@@ -171,12 +192,14 @@
         private System.Windows.Forms.MenuStrip menuStripSpravochnik;
         private System.Windows.Forms.ToolStripMenuItem справочникToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem ингредиентыToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem пиццаToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem консервыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonCreateOrder;
         private System.Windows.Forms.Button buttonakeOrderInWork;
         private System.Windows.Forms.Button buttonOrderReady;
         private System.Windows.Forms.Button buttonPayOrder;
         private System.Windows.Forms.Button buttonRef;
+        private System.Windows.Forms.Button buttonFillWarehouse;
     }
 }
