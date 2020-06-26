@@ -30,7 +30,7 @@ namespace ZavodConservView
             currentContainer.RegisterType<IOrderLogic, OrderLogic>(new HierarchicalLifetimeManager()); 
             currentContainer.RegisterType<IConservLogic, ConservLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<MainLogic>(new HierarchicalLifetimeManager());
-
+            currentContainer.RegisterType<IWarehouseLogic, WarehouseLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }

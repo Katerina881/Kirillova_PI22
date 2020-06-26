@@ -8,9 +8,12 @@ namespace ZavodConservbusinessLogic.BusinessLogics
     public class MainLogic
     {
         private readonly IOrderLogic orderLogic;
-        public MainLogic(IOrderLogic orderLogic)
+        private readonly IWarehouseLogic warehouseLogic;
+
+        public MainLogic(IOrderLogic orderLogic, IWarehouseLogic warehouseLogic)
         { 
             this.orderLogic = orderLogic;
+            this.warehouseLogic = warehouseLogic;
         }
 
         public void CreateOrder(CreateOrderBindingModel model) 
@@ -92,6 +95,11 @@ namespace ZavodConservbusinessLogic.BusinessLogics
                 DateImplement = order.DateImplement,
                 Status = OrderStatus.Оплачен
             }); 
+        }
+
+        public void FillWarehouse(WarehouseComponentBindingModel model)
+        {
+            warehouseLogic.AddComponent(model);
         }
     }
 }

@@ -59,6 +59,12 @@ namespace ZavodConservView
             form.ShowDialog();
         }
 
+        private void СкладыToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormWarehouses>();
+            form.ShowDialog();
+        }
+
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();
@@ -118,6 +124,12 @@ namespace ZavodConservView
         private void buttonRef_Click(object sender, EventArgs e)
         {
             LoadData();
+        }
+
+        private void ButtonFillWarehouse_Click(object sender, EventArgs e)
+        {
+            var form = Container.Resolve<FormFillWarehouse>();
+            form.ShowDialog();
         }
     }
 }
