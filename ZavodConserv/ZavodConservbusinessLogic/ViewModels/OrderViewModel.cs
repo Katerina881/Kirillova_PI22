@@ -1,0 +1,70 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.Serialization;
+using ZavodConservbusinessLogic.Attributes;
+using ZavodConservbusinessLogic.Enums;
+
+namespace ZavodConservbusinessLogic.ViewModels
+{
+    [DataContract]
+    public class OrderViewModel : BaseViewModel
+    {
+        [DataMember]
+        public int ClientId { get; set; }
+
+        [DataMember]
+        public int ConservId { get; set; }
+
+        [DataMember]
+        public int? ImplementerId { get; set; }
+
+        [DataMember]
+        [DisplayName("Исполнитель")]
+        [Column(title: "Исполнитель", width: 70)]
+        public string ImplementerFIO { get; set; }
+
+        [DataMember]
+        [Column(title: "Клиент", width: 150)]
+        public string ClientFIO { get; set; }
+
+        [DataMember]
+        [DisplayName("Консерва")]
+        [Column(title: "Консерва", width: 100)]
+        public string ConservName { get; set; }
+
+        [Column(title: "Количество", width: 100)]
+        [DataMember]
+        [DisplayName("Количество")]
+        public int Count { get; set; }
+        [Column(title: "Сумма", width: 50)]
+        [DataMember]
+        [DisplayName("Сумма")]
+        public decimal Sum { get; set; }
+        [Column(title: "Статус", width: 100)]
+        [DataMember]
+        [DisplayName("Статус")]
+        public OrderStatus Status { get; set; }
+        [Column(title: "Дата создания", width: 100)]
+        [DataMember]
+        [DisplayName("Дата создания")]
+        public DateTime DateCreate { get; set; }
+        [Column(title: "Дата выполнения", width: 100)]
+        [DataMember]
+        [DisplayName("Дата выполнения")]
+        public DateTime? DateImplement { get; set; }
+
+        public override List<string> Properties() => new List<string> 
+        { 
+            "Id",
+            "ClientFIO",
+            "ConservName",
+            "ImplementerFIO",
+            "Count",
+            "Sum",
+            "Status",
+            "DateCreate",
+            "DateImplement" 
+        };
+    }
+}
