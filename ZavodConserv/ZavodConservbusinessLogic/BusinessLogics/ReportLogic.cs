@@ -64,7 +64,7 @@ IOrderLogic orderLLogic)
             SaveToWord.CreateDoc(new WordInfo
             {
                 FileName = model.FileName,
-                Title = "Список консерв",
+                Title = "Список консервов",
                 Conserv = ConservLogic.Read(null),
             });
         }

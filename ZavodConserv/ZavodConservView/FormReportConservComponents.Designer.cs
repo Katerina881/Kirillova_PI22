@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ButtonSaveToExcel = new System.Windows.Forms.Button();
             this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
             this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
             this.buttonMake = new System.Windows.Forms.Button();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +50,24 @@
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.Size = new System.Drawing.Size(537, 402);
             this.dataGridView.TabIndex = 0;
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Дата";
+            this.Column1.Name = "Column1";
+            this.Column1.Width = 160;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Консерва";
+            this.Column2.Name = "Column2";
+            this.Column2.Width = 160;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Цена";
+            this.Column3.Name = "Column3";
+            this.Column3.Width = 110;
             // 
             // ButtonSaveToExcel
             // 
@@ -85,24 +103,6 @@
             this.buttonMake.UseVisualStyleBackColor = true;
             this.buttonMake.Click += new System.EventHandler(this.ButtonMake_Click);
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Дата";
-            this.Column1.Name = "Column1";
-            this.Column1.Width = 160;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Консерва";
-            this.Column2.Name = "Column2";
-            this.Column2.Width = 160;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Цена";
-            this.Column3.Name = "Column3";
-            this.Column3.Width = 110;
-            // 
             // FormReportConservComponents
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -114,7 +114,7 @@
             this.Controls.Add(this.ButtonSaveToExcel);
             this.Controls.Add(this.dataGridView);
             this.Name = "FormReportConservComponents";
-            this.Text = "Компоненты по консервам";
+            this.Text = "Список заказов";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
 

@@ -58,7 +58,14 @@ namespace ZavodConservView
         {
             try
             {
-                Program.ConfigGrid(logic.Read(null), dataGridView);
+                if (conservComponents != null)
+                {
+                    dataGridView.Rows.Clear();
+                    foreach (var pc in conservComponents)
+                    {
+                        dataGridView.Rows.Add(new object[] { pc.Key, pc.Value.Item1, pc.Value.Item2 });
+                    }
+                }
             }
             catch (Exception ex)
             {

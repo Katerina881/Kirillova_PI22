@@ -105,7 +105,7 @@
             this.buttonUpd.TabIndex = 4;
             this.buttonUpd.Text = "Обновить";
             this.buttonUpd.UseVisualStyleBackColor = true;
-            this.buttonUpd.Click += new System.EventHandler(this.ButtonUpd_Click);
+            this.buttonUpd.Click += new System.EventHandler(this.ButtonRef_Click);
             // 
             // buttonDel
             // 
@@ -127,7 +127,7 @@
             this.buttonRef.TabIndex = 2;
             this.buttonRef.Text = "Изменить";
             this.buttonRef.UseVisualStyleBackColor = true;
-            this.buttonRef.Click += new System.EventHandler(this.ButtonRef_Click);
+            this.buttonRef.Click += new System.EventHandler(this.ButtonUpd_Click);
             // 
             // buttonAdd
             // 

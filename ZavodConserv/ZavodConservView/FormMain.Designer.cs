@@ -39,13 +39,13 @@
             this.ComponentConservToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.OrdersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.запускРаботToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьБэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.клиентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonCreateOrder = new System.Windows.Forms.Button();
             this.buttonPayOrder = new System.Windows.Forms.Button();
             this.buttonRef = new System.Windows.Forms.Button();
             this.buttonMessages = new System.Windows.Forms.Button();
-            this.создатьБэкапToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripSpravochnik.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
@@ -118,21 +118,21 @@
             // 
             this.ComponentsToolStripMenuItem.Name = "ComponentsToolStripMenuItem";
             this.ComponentsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.ComponentsToolStripMenuItem.Text = "Список компонентов";
+            this.ComponentsToolStripMenuItem.Text = "Список консервов";
             this.ComponentsToolStripMenuItem.Click += new System.EventHandler(this.ComponentsToolStripMenuItem_Click);
             // 
             // ComponentConservToolStripMenuItem
             // 
             this.ComponentConservToolStripMenuItem.Name = "ComponentConservToolStripMenuItem";
-            this.ComponentConservToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.ComponentConservToolStripMenuItem.Text = "Компоненты по консервам";
+            this.ComponentConservToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.ComponentConservToolStripMenuItem.Text = "Список заказов";
             this.ComponentConservToolStripMenuItem.Click += new System.EventHandler(this.ComponentConservToolStripMenuItem_Click);
             // 
             // OrdersToolStripMenuItem
             // 
             this.OrdersToolStripMenuItem.Name = "OrdersToolStripMenuItem";
-            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
-            this.OrdersToolStripMenuItem.Text = "Список заказов";
+            this.OrdersToolStripMenuItem.Size = new System.Drawing.Size(224, 22);
+            this.OrdersToolStripMenuItem.Text = "Консервы с компонентами";
             this.OrdersToolStripMenuItem.Click += new System.EventHandler(this.OrdersToolStripMenuItem_Click);
             // 
             // запускРаботToolStripMenuItem
@@ -141,6 +141,13 @@
             this.запускРаботToolStripMenuItem.Size = new System.Drawing.Size(92, 20);
             this.запускРаботToolStripMenuItem.Text = "Запуск работ";
             this.запускРаботToolStripMenuItem.Click += new System.EventHandler(this.запускРаботToolStripMenuItem_Click);
+            // 
+            // создатьБэкапToolStripMenuItem
+            // 
+            this.создатьБэкапToolStripMenuItem.Name = "создатьБэкапToolStripMenuItem";
+            this.создатьБэкапToolStripMenuItem.Size = new System.Drawing.Size(97, 20);
+            this.создатьБэкапToolStripMenuItem.Text = "Создать бэкап";
+            this.создатьБэкапToolStripMenuItem.Click += new System.EventHandler(this.создатьБэкапToolStripMenuItem_Click);
             // 
             // клиентыToolStripMenuItem
             // 
@@ -202,14 +209,6 @@
             this.buttonMessages.Text = "Сообщения";
             this.buttonMessages.UseVisualStyleBackColor = true;
             this.buttonMessages.Click += new System.EventHandler(this.buttonMessages_Click);
-            // 
-            // создатьБэкапToolStripMenuItem
-            // 
-            this.создатьБэкапToolStripMenuItem.Name = "создатьБэкапToolStripMenuItem";
-            this.создатьБэкапToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
-            this.создатьБэкапToolStripMenuItem.Text = "Создать бэкап";
-            this.создатьБэкапToolStripMenuItem.Click += new System.EventHandler(this.создатьБэкапToolStripMenuItem_Click);
-            // 
             // 
             // FormMain
             // 
